@@ -1,0 +1,47 @@
+/* Global Styles and Look and Feel GoodOK */
+body {
+	font-family: Arial, sans-serif;
+	color: #000;
+}
+.custom-input{
+	border:1px solid #0092A2;
+	border-radius:8px;	
+}
+
+.btn-default {
+	color: #fff;
+	background-color: #2f99a5;
+	border: none;
+}
+
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+	opacity: 1;
+	color: #FFFFFF;
+	background-color: #0092A2;
+	border: none;
+	outline: none !important;
+}
+
+.btn-default:hover {
+	color: #333;
+	background-color: #e6e6e6;
+	color: #FFFFFF;
+	background-color: #b2b2b2;
+}
+
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.5;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	border-radius: 30px;
+}
+
+
+

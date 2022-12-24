@@ -1,0 +1,135 @@
+<template>
+  <!-- Modal -->
+  <div
+    class="modal fade show d-block"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">
+            {{title}}
+          </h1>
+        </div>
+        <div class="modal-body">
+            <p v-if="errors.length">
+              <b>{{$t("EDITUSER_ERRORS_WARNING",errors.length)}}:</b>
+              <ul>
+                <li v-for="(entry, index) in errors" :key="index" class="text-danger">{{ entry }}</li>
+              </ul>
+          </p>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_USERNAME")}}</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                v-model="user.user"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_NAME")}}</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                v-model="user.name"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_SURNAME")}}</label>
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control"
+                v-model="user.surname"
+              />
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_PASSWORD")}}</label>
+            <div class="col-sm-8">
+              <input
+                type="password"
+                class="form-control"
+                v-model="user.pass"
+              />
+            </div>
+          </div>           
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" @click="hideModal()">
+            Cerrar
+          </button>
+          <button type="button" class="btn btn-default" @click="save()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { mapActions } from "vuex"
+
+export default {
+  props: ["currentUser","isNewUser"],
+  data() {
+    return {
+      user: this.currentUser,
+      errors: []
+    }
+  },
+  computed: {
+    title(){
+        if (this.isNewUser){
+            return this.$t("EDITUSER_TITLE_CREATE")
+        }else{
+            return this.$t("EDITUSER_TITLE_EDIT")
+        }
+    }
+  },
+  methods: {
+    hideModal() {
+      this.$emit("hideModalEvt")
+    },
+    ...mapActions({
+      saveUser: "moduleUsers/addUser",
+      updateUser: "moduleUsers/updateUser",
+      setLoading: "isLoading"
+    }),
+    async save(){
+      this.errors = []
+      if (this.isNewUser){
+        if (this.currentUser.user == ''){
+          this.errors.push("El nombre de usuario es obligatorios")
+          return
+        }
+        this.setLoading(true)
+        await this.saveUser(this.currentUser)
+        this.setLoading(false)
+        this.hideModal()
+
+      }else{
+        if (this.currentUser.user == ''){
+          this.errors.push("El nombre de usuario es obligatorios")
+          return
+        }
+        this.setLoading(true)
+        await this.updateUser(this.currentUser, )
+        this.setLoading(false)
+        this.hideModal()
+      }
+    }
+  },
+}
+
+</script>
+
+<style scoped></style>
