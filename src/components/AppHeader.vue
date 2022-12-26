@@ -87,6 +87,7 @@ export default {
         this.$i18n.locale = "en"
         this.flag = require("@/assets/images/great_britain.svg")
       }
+      localStorage.setItem('last-locale', idioma)
     }    
   },
   mounted() {

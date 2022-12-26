@@ -29,5 +29,9 @@ export default {
   async updateUser(payload){   
     const url = "/dms/users/" + payload.user
     return await dmsClient.put(url, payload)
-  }  
+  },
+  async deleteUser(username){
+    const url = "/dms/users/" + username
+    return await dmsClient.delete(url)
+  }
 }

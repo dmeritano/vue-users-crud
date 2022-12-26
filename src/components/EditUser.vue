@@ -9,7 +9,7 @@
     aria-labelledby="staticBackdropLabel"
     aria-hidden="true"
   >
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="staticBackdropLabel">
@@ -30,6 +30,7 @@
                 type="text"
                 class="form-control"
                 v-model="user.user"
+                :disabled="isDisabled"
               />
             </div>
           </div>
@@ -65,10 +66,10 @@
           </div>           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" @click="hideModal()">
-            Cerrar
+          <button type="button" class="btn btn-secondary" @click="hideModal()">
+            {{$t("GENERAL_CANCEL_BTN")}}
           </button>
-          <button type="button" class="btn btn-default" @click="save()">Guardar</button>
+          <button type="button" class="btn btn-default" @click="save()">{{$t("GENERAL_SAVE_BTN")}}</button>
         </div>
       </div>
     </div>
@@ -93,6 +94,9 @@ export default {
         }else{
             return this.$t("EDITUSER_TITLE_EDIT")
         }
+    },
+    isDisabled(){
+      return !this.isNewUser
     }
   },
   methods: {
@@ -107,25 +111,23 @@ export default {
     async save(){
       this.errors = []
       if (this.isNewUser){
-        if (this.currentUser.user == ''){
-          this.errors.push("El nombre de usuario es obligatorios")
+        if(this.currentUser.user == ''){
+          this.errors.push(this.$t("EDITUSER_VALIDATION_USERNAME"))        
+        }
+        if(this.currentUser.pass == ''){
+          this.errors.push(this.$t("EDITUSER_VALIDATION_PASSWORD"))        
+        }
+        if (this.errors.length > 0){
           return
         }
-        this.setLoading(true)
-        await this.saveUser(this.currentUser)
-        this.setLoading(false)
-        this.hideModal()
-
-      }else{
-        if (this.currentUser.user == ''){
-          this.errors.push("El nombre de usuario es obligatorios")
-          return
-        }
-        this.setLoading(true)
-        await this.updateUser(this.currentUser, )
-        this.setLoading(false)
-        this.hideModal()
       }
+      //Create or update user
+      this.setLoading(true)
+      this.isNewUser ? 
+        await this.saveUser(this.currentUser) :
+        await this.updateUser(this.currentUser)              
+      this.setLoading(false)
+      this.hideModal()
     }
   },
 }

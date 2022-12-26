@@ -37,7 +37,18 @@ const moduleUsers = {
         found.surname = payload.surname
         state.users[index] = found
       }
-    }    
+    },
+    deleteUser(state, username){
+      var found = state.users.find(function (item) {
+        return item.user == username;
+      })
+      if (found){
+        var index = state.users.indexOf({
+          user : username
+        })        
+        state.users.splice(index,1)
+      }
+    }         
   },
   actions: {
     async login(context, payload) {
@@ -92,7 +103,18 @@ const moduleUsers = {
         .catch( (error) => {
           console.log(error);
         })
-    }            
+    },
+    async deleteUser(context, username){
+      await apiDms
+        .deleteUser(username)
+        .then( (res) => {
+          console.log(res);
+          context.commit("deleteUser", username)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    }
   },
 }
 

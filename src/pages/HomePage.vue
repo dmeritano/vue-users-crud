@@ -24,36 +24,48 @@
             <td>{{entry.surname}}</td>
             <td>
               <button class="btn btn-sm btn-default btn-actions-w" @click="editUser(index)">{{$t("HOME_TABLE_EDIT_BTN")}}</button>
+              &nbsp;
+              <button class="btn btn-sm btn-secondary btn-actions-w" @click="deleteUserIntent(index)">{{$t("HOME_TABLE_DELETE_BTN")}}</button>
             </td>
           </tr>          
         </tbody>
       </table>
     </div>
   </div>
-  <edit-user v-if="showModal" @hideModalEvt="hideModal()" :currentUser="user" :isNewUser="isNewUser"/>
+  
+  <edit-user v-if="showModal" @hideModalEvt="showModal=false" :currentUser="user" :isNewUser="isNewUser"/>   
+  <confirm-modal v-if="showConfirmDialog" @hideConfirmDialogEvt="showConfirmDialog=false" @confirmResponse="confirmDeleteUser()" :message="confirmDialogText"/>
 </template>
-
 
 
 <script>
 import { mapActions } from "vuex"
 import { emptyUser, createUser } from '../helpers'
 import EditUser from '../components/EditUser.vue'
+import ConfirmModal from '../components/ConfirmModal.vue'
 
 export default {
   components: {
     'edit-user' : EditUser,
+    'confirm-modal' : ConfirmModal
   },  
   data() {
     return {
       showModal : false,
+      showConfirmDialog : false,
+      confirmDialogText : "",
       user : emptyUser(),
-      isNewUser : false
+      isNewUser : false,
+      //users : this.$store.getters["moduleUsers/users"] 
     }
   },
-  computed: {
+  watch:{
+
+  },
+  computed: {    
     users(){
-      return this.$store.getters["moduleUsers/users"]
+      let usersSorted = this.$store.getters["moduleUsers/users"] 
+      return usersSorted.sort( (a,b) => a.user.localeCompare(b.user))
     }
   },
   mounted() {
@@ -65,9 +77,11 @@ export default {
   methods: {
     ...mapActions({
       getUsers: "moduleUsers/getUsers",
-    }),    
+      deleteUser : "moduleUsers/deleteUser",
+      setLoading: "isLoading"
+    }),
     editUser(index){
-      //this.user = this.users[index] - NOOO quedan enganchados
+      //this.user = this.users[index] - NOOO - no queremos que queden bindeados
       this.user = createUser(this.users[index])      
       this.isNewUser = false
       this.showModal = true
@@ -77,11 +91,20 @@ export default {
       this.isNewUser = true
       this.showModal = true
     },
-    hideModal(){
-      this.showModal = false
+    deleteUserIntent(index){
+      this.user = createUser(this.users[index])
+      this.confirmDialogText = this.$t('HOME_DELETE_USER_CONFIRMATION',{user : this.user.user})
+      this.showConfirmDialog = true
+    },
+    async confirmDeleteUser(){
+      this.showConfirmDialog = false
+      this.setLoading(true)
+      await this.deleteUser(this.user.user)
+      this.setLoading(false)
     }
   },  
   created() {
+    //Esto tambien podria hacer luego del login exitoso y no aqui
     this.getUsers()
   },
 }

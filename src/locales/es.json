@@ -15,12 +15,19 @@
   "HOME_TABLE_COL_3" : "Apellido",
   "HOME_TABLE_COL_4" : "Acciones",
   "HOME_TABLE_EDIT_BTN" : "Editar",
+  "HOME_TABLE_DELETE_BTN" : "Eliminar",
+  "HOME_DELETE_USER_CONFIRMATION" : "¿Confirma que quiere borrar al usuario '{user}' ?",
   "EDITUSER_TITLE_CREATE" : "Crear nuevo usuario",
   "EDITUSER_TITLE_EDIT" : "Editar usuario",
   "EDITUSER_USERNAME" : "Usuario",
   "EDITUSER_NAME" : "Nombre",
   "EDITUSER_SURNAME" : "Apellido",
   "EDITUSER_PASSWORD" : "Contraseña",
+  "EDITUSER_VALIDATION_USERNAME" : "El nombre de usuario es obligatorio",
+  "EDITUSER_VALIDATION_PASSWORD" : "La contraseña es obligatoria",
   "EDITUSER_ERRORS_WARNING" : "Por favor, revise el siguiente error | Por favor, revise los siguientes errores",
-  "LOGIN_MAIN_TITLE" : "Administración de Usuarios"
+  "LOGIN_MAIN_TITLE" : "Administración de Usuarios",
+  "GENERAL_CANCEL_BTN" : "Cancelar",
+  "GENERAL_CONFIRM_BTN" : "Confirmar",
+  "GENERAL_SAVE_BTN" : "Guardar"
 }

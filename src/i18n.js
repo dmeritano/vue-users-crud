@@ -22,7 +22,15 @@ function loadLocaleMessages() {
 
 export default createI18n({
   legacy: false,
-  locale: process.env.VUE_APP_I18N_LOCALE || 'en',
+  //locale: process.env.VUE_APP_I18N_LOCALE || 'en',
+  locale: getStartingLocale(),
   fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
   messages: loadLocaleMessages()
 })
+
+function getStartingLocale() {
+  if (localStorage.getItem('last-locale')) {
+      return localStorage.getItem('last-locale')
+  }
+  return process.env.VUE_APP_I18N_LOCALE || "en"
+}
