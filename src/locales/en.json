@@ -10,6 +10,7 @@
   "HEADER_LOCALE_LONG_NAME_ES" : "Spanish",
   "HOME_MAIN_TITLE" : "User List",
   "HOME_CREATE_USER_BTN" : "Add user",
+  "HOME_SEARCH_BOX" : "Search for user",
   "HOME_TABLE_COL_1" : "Username",  
   "HOME_TABLE_COL_2" : "Name",
   "HOME_TABLE_COL_3" : "Surname",
@@ -26,5 +27,6 @@
   "EDITUSER_VALIDATION_USERNAME" : "Username is required",
   "EDITUSER_VALIDATION_PASSWORD" : "Password is required",
   "EDITUSER_ERRORS_WARNING" : "Please, check following error | Please, check following errors",
-  "LOGIN_MAIN_TITLE" : "User's Administration"
+  "LOGIN_MAIN_TITLE" : "User's Administration",
+  "FOOTER_LINE1" : "{'@'} ADDALIA. All rights reserved."
 }

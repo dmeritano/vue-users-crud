@@ -10,6 +10,7 @@
   "HEADER_LOCALE_LONG_NAME_ES" : "Español",
   "HOME_MAIN_TITLE" : "Lista de usuarios",  
   "HOME_CREATE_USER_BTN" : "Agregar usuario",
+  "HOME_SEARCH_BOX" : "Buscar usuario",
   "HOME_TABLE_COL_1" : "Usuario",  
   "HOME_TABLE_COL_2" : "Nombre",
   "HOME_TABLE_COL_3" : "Apellido",
@@ -29,5 +30,6 @@
   "LOGIN_MAIN_TITLE" : "Administración de Usuarios",
   "GENERAL_CANCEL_BTN" : "Cancelar",
   "GENERAL_CONFIRM_BTN" : "Confirmar",
-  "GENERAL_SAVE_BTN" : "Guardar"
+  "GENERAL_SAVE_BTN" : "Guardar",
+  "FOOTER_LINE1" : "{'@'} ADDALIA. Todos los derechos reservados."
 }

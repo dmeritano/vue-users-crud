@@ -8,7 +8,7 @@
       </div>
       <div class="col mb-3 pe-3">
         <div class="d-flex flex-row-reverse">
-          <input type="text" class="form-control search-input custom-input" v-model="searchTerm" placeholder="Buscar usuario" @keyup="search"/>
+          <input type="text" class="form-control search-input custom-input" v-model="searchTerm" :placeholder="$t('HOME_SEARCH_BOX')" @keyup="search"/>
         </div>        
       </div>  
     </div>
