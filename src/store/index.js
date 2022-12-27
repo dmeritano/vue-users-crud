@@ -2,11 +2,15 @@ import { createStore } from 'vuex'
 import VuexPersistence from 'vuex-persist'
 import moduleUsers from './modules/users'
 
+function initialState () {
+    return {
+      authenticated:false,
+      isLoading:false
+    }
+  }
+
 export const store = createStore({
-    state:{
-        authenticated:false,
-        isLoading:false
-    },
+    state:initialState(),
     getters:{
         authenticated(state){
             return state.authenticated
@@ -16,19 +20,26 @@ export const store = createStore({
         }
     },
     mutations:{
-        login:(state)=>{        
-            state.authenticated = true
-        },
-        logout:(state) => {
-            state.authenticated = false
+        setAuthenticatedStatus:(state, payload) => {
+            state.authenticated = payload.status
         },
         isLoading(state, value){
             state.isLoading = value
+        },
+        resetState(state){
+            const s = initialState()
+            Object.keys(s).forEach(key => {
+              state[key] = s[key]
+            })             
         }
     },
     actions:{
         isLoading(context, value){
             context.commit("isLoading", value)
+        },
+        clearAll(context){
+            context.commit("reset")
+            context.commit("moduleUsers/reset")
         }
     },
     modules:{
@@ -40,3 +51,4 @@ export const store = createStore({
         }).plugin
     ]
 })
+

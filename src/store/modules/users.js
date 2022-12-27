@@ -1,12 +1,20 @@
 import apiDms from "@/services/service-apidms"
 
+function initialState () {
+  return {
+    dmsInfo:{},
+    users:[]
+  }
+}
+
 const moduleUsers = {
   namespaced: true,
+  state: initialState(),
+  /*
   state: () => ({
     dmsInfo : {},
     users:[],
-    added:""
-  }),
+  }),*/
   getters : {
     dmsInfo(state){
       return state.dmsInfo
@@ -48,14 +56,20 @@ const moduleUsers = {
         })        
         state.users.splice(index,1)
       }
-    }         
+    },
+    resetState(state){
+      const s = initialState()
+      Object.keys(s).forEach(key => {
+        state[key] = s[key]
+      })      
+    }
   },
   actions: {
     async login(context, payload) {
       await apiDms
         .login(payload)
         .then(() => {
-          context.commit("login", null, { root: true })
+          context.commit("setAuthenticatedStatus", {status:true}, { root: true })
         })
         .catch((error) => console.log(error))
     },
@@ -65,8 +79,11 @@ const moduleUsers = {
         .then(() => {})
         .catch( (error) => {
           console.log(error)
-        })
-        context.commit("logout", null, { root: true })
+        })        
+        
+        context.commit("setAuthenticatedStatus", {status:false}, { root: true })
+        context.commit("resetState", null, { root: true })
+        context.commit("resetState")
     },
     async dmsInfo(context) {
       await apiDms

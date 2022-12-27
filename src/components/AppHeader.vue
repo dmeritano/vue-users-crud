@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
@@ -75,8 +76,12 @@ export default {
     },
   },
   methods: {
+    ...mapActions({      
+      setLoading: "isLoading"
+    }),    
     async logout() {
-      await this.$store.dispatch("moduleUsers/logout")
+      this.setLoading(true)
+      await this.$store.dispatch("moduleUsers/logout")      
       this.$router.push("/login")
     },
     idioma(idioma) {
@@ -92,10 +97,12 @@ export default {
   },
   mounted() {
       document.title = this.$t("HTML_HEAD_TITLE_BASE")
+  },
+  created(){
       this.$i18n.locale === "es" ?
       this.flag = require("@/assets/images/spain.svg") :
       this.flag = require("@/assets/images/great_britain.svg")
-  },
+  }
 }
 </script>
 
