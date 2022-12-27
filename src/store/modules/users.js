@@ -78,7 +78,8 @@ const moduleUsers = {
         .logout()
         .then(() => {})
         .catch( (error) => {
-          console.log(error)
+          console.log("hubo un error");
+          console.log(error);
         })        
         
         context.commit("setAuthenticatedStatus", {status:false}, { root: true })

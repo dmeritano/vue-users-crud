@@ -1,8 +1,7 @@
-import LoginPage from '../pages/LoginPage'
-import HomePage from '../pages/HomePage'
+import { createRouter, createWebHistory } from 'vue-router'
+import { routes } from '../router/routes'
 
-export const routes = [
-    { path: '/login', component: LoginPage},
-    { path: '/home', component: HomePage, meta: { requiresAuth: true } },
-    { path: '/:pathMatch(.*)', redirect:'/home'}
-]
+export const router = createRouter({
+    history: createWebHistory(),
+    routes,
+})

@@ -2,10 +2,15 @@
   <div class="container px-5">
 
     <h3 class="my-4">{{ $t("HOME_MAIN_TITLE") }}</h3>
-    <div class="row">
+    <div class="row justify-space-between">
       <div class="col mb-3">
         <button class="btn btn-sm btn-default" @click="addUser()">{{$t("HOME_CREATE_USER_BTN")}}</button>
       </div>
+      <div class="col mb-3 pe-3">
+        <div class="d-flex flex-row-reverse">
+          <input type="text" class="form-control search-input custom-input" v-model="searchTerm" placeholder="Buscar usuario" @keyup="search"/>
+        </div>        
+      </div>  
     </div>
     <div>      
       <table class="table table-responsive table-striped">
@@ -56,6 +61,7 @@ export default {
       confirmDialogText : "",
       user : emptyUser(),
       isNewUser : false,
+      searchTerm : ""
       //users : this.$store.getters["moduleUsers/users"] 
     }
   },
@@ -65,7 +71,12 @@ export default {
   computed: {    
     users(){
       let usersSorted = this.$store.getters["moduleUsers/users"] 
-      return usersSorted.sort( (a,b) => a.user.localeCompare(b.user))
+      if (this.searchTerm.length > 1){
+        return usersSorted.filter(entry => findUserOrNameOrSurname(entry, this.searchTerm.toLowerCase()))
+          .sort( (a,b) => a.user.localeCompare(b.user))
+      }else{
+        return usersSorted.sort( (a,b) => a.user.localeCompare(b.user))
+      }      
     }
   },
   mounted() {
@@ -108,9 +119,19 @@ export default {
     this.getUsers()
   },
 }
+
+function findUserOrNameOrSurname(current, searchTerm){
+  return (current.user.toLowerCase().includes(searchTerm) ||
+    current.name.toLowerCase().includes(searchTerm) ||
+    current.surname.toLowerCase().includes(searchTerm)
+  )
+}
 </script>
 <style scoped>
 .btn-actions-w{
   width: 80px;
+}
+.search-input{
+  width: 200px;
 }
 </style>

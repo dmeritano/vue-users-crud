@@ -7,6 +7,10 @@ body {
 	border:1px solid #0092A2;
 	border-radius:8px;	
 }
+.custom-input:focus {
+	border-color: #0092A2;
+	box-shadow: 0px 0px 2px #01bdd2 inset, 0px 0px 2px #01bdd2;
+}
 
 .btn-default {
 	color: #fff;

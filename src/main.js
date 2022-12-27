@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import { createRouter, createWebHistory } from 'vue-router'
-import { routes } from './router'
+//import { createRouter, createWebHistory } from 'vue-router'
+//import { routes } from './router/routes'
+import { router } from './router'
 import { store } from './store'
 import makeEnvConfig from './services/service-config'
 import i18n from './i18n'
@@ -15,11 +16,13 @@ import 'bootstrap/dist/js/bootstrap.min'
 //Global styles
 import '@/assets/css/global.css';
 
+/*
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
 })
+*/
 
 router.beforeEach( (to, from, next) => {
     if (to.matched.some(route => route.meta.requiresAuth)){

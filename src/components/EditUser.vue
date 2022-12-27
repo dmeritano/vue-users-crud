@@ -28,7 +28,7 @@
             <div class="col-sm-8">
               <input
                 type="text"
-                class="form-control"
+                class="form-control custom-input"
                 v-model="user.user"
                 :disabled="isDisabled"
               />
@@ -39,7 +39,7 @@
             <div class="col-sm-8">
               <input
                 type="text"
-                class="form-control"
+                class="form-control custom-input"
                 v-model="user.name"
               />
             </div>
@@ -49,7 +49,7 @@
             <div class="col-sm-8">
               <input
                 type="text"
-                class="form-control"
+                class="form-control custom-input"
                 v-model="user.surname"
               />
             </div>
@@ -59,7 +59,7 @@
             <div class="col-sm-8">
               <input
                 type="password"
-                class="form-control"
+                class="form-control custom-input"
                 v-model="user.pass"
               />
             </div>
