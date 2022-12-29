@@ -115,73 +115,54 @@ const moduleUsers = {
         })    
     },
     async addUser(context, payload){
-      context.commit("isLoading", {status:true}, { root: true })    
+      context.commit("isLoading", {status:true}, { root: true })
+      context.commit("setError", {error : getErrorResponse(null) })
       await apiDms
         .addUser(payload)
         .then( (res) => {
           context.commit("addUser", res.data)
         })
         .catch( (error) => {
-          console.log(error);
+          context.commit("setError", {error : getErrorResponse(error) })
         })
         .finally( ()=> {
           context.commit("isLoading", {status:false}, { root: true })    
         })           
     },
     async updateUser(context, payload){
-      context.commit("isLoading", {status:true}, { root: true })    
+      context.commit("isLoading", {status:true}, { root: true })   
+      context.commit("setError", {error : getErrorResponse(null) }) 
       await apiDms
         .updateUser(payload)
         .then( (res) => {
           context.commit("updateUser", res.data)
         })
         .catch( (error) => {
-          console.log(error);
+          context.commit("setError", {error : getErrorResponse(error) })
         })
         .finally( ()=> {
           context.commit("isLoading", {status:false}, { root: true })    
         })                   
     },
     async deleteUser(context, username){
+      context.commit("isLoading", {status:true}, { root: true })   
+      context.commit("setError", {error : getErrorResponse(null) }) 
       await apiDms
         .deleteUser(username)
-        .then( (res) => {
-          console.log(res);
-          context.commit("deleteUser", username)
+        .then( () => {
+          context.commit("deleteUser", username)          
         })
         .catch((error) => {
-          console.log(error);
+          context.commit("setError", {error : getErrorResponse(error) })
         })
+        .finally( ()=> {
+          context.commit("isLoading", {status:false}, { root: true })    
+        })         
     },
     clearError(context){
       context.commit("setError", {error : getErrorResponse(null) })
     }
   },
 }
-
-/*
-function createErrorResponse(error){
-  const resp = emptyResponse()
-  
-  if (error.code == "ERR_NETWORK"){
-    resp.generalNetworkError = true,
-    resp.generalNetworkErrorMessage = i18n.global.t("APP_NETWORK_ERROR")
-    return resp
-  }
-
-  if (error.url.indexOf("authenticate") && error.method === "post"){    
-    resp.loginCredentialsError = true
-    if (error.status == "401"){      
-      resp.loginCredentialsErrorMessage = i18n.global.t("API_ERRORS_INVALID_USER_PASS")
-    }else{
-      resp.loginCredentialsErrorMessage = i18n.global.t("API_ERRORS_GENERAL")
-    }
-    return resp
-  }
-
-  
-  return resp  
-}*/
-
 
 export default moduleUsers

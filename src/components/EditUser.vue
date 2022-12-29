@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   props: ["currentUser","isNewUser"],
@@ -88,6 +88,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({getApiError: 'moduleUsers/error'}),
     title(){
         if (this.isNewUser){
             return this.$t("EDITUSER_TITLE_CREATE")
@@ -96,7 +97,18 @@ export default {
         }
     },
     isDisabled(){
-      return !this.isNewUser
+      return !this.isNewUser 
+    },    
+    getErrors(){
+      let resp = {...this.errors}
+      return resp
+      /*
+      if (this.getApiError.hasError){
+        resp.push(this.getApiError.i18nMsg)
+        return resp
+      }else{
+        return resp  
+      }*/
     }
   },
   methods: {
@@ -117,14 +129,22 @@ export default {
           this.errors.push(this.$t("EDITUSER_VALIDATION_PASSWORD"))        
         }
         if (this.errors.length > 0){
+          console.log(this.errors);
           return
         }
       }
       //Create or update user
       this.isNewUser ? 
         await this.saveUser(this.currentUser) :
-        await this.updateUser(this.currentUser)              
-      this.hideModal()
+        await this.updateUser(this.currentUser)
+        
+      if (this.getApiError.hasError){
+        this.errors.push(this.getApiError.i18nMsg)
+        console.log(this.getApiError);
+      }else{
+        this.hideModal()
+      }
+      
     }
   },
 }

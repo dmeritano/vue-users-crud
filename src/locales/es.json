@@ -28,12 +28,17 @@
   "EDITUSER_VALIDATION_PASSWORD" : "La contraseña es obligatoria",
   "EDITUSER_ERRORS_WARNING" : "Por favor, revise el siguiente error | Por favor, revise los siguientes errores",
   "LOGIN_MAIN_TITLE" : "Administración de Usuarios",
+  "CONFIRM_DIALOG_TITLE" : "Información",
+  "ALERT_DIALOG_TITLE" : "Información",
   "GENERAL_CANCEL_BTN" : "Cancelar",
   "GENERAL_CONFIRM_BTN" : "Confirmar",
   "GENERAL_SAVE_BTN" : "Guardar",
   "FOOTER_LINE1" : "{'@'} ADDALIA. Todos los derechos reservados.",
   "API_ERRORS_INVALID_USER_PASS" : "Usuario o contraseña incorrecto",
   "API_ERRORS_GENERAL" : "Ha ocurrido un error en la petición",
+  "API_ERRORS_USER_EXIST" : "El nombre de usuario ya existe",
+  "API_ERRORS_USER_NOT_EXIST" : "Usuario ya fue eliminado desde otra aplicación/terminal",
+  "API_ERRORS_USER_COULD_NOT_UPDATE_PASSWORD" : "No se pudo actualizar la contraseña",
   "APP_NETWORK_ERROR" : "Error de conectividad - No hay conexión",
   "APP_UNKNOWN_ERROR" : "Error desconocido"
 }

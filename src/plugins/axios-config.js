@@ -28,6 +28,7 @@ export function createDmsClientInstance(baseURL) {
       return response
     },
     function (error) {
+      console.log(error);
       var hasResponse = "response" in error
       const data = {
         status: hasResponse ? error.response.status : "",

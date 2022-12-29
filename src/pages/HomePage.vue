@@ -40,37 +40,41 @@
   
   <edit-user v-if="showModal" @hideModalEvt="showModal=false" :currentUser="user" :isNewUser="isNewUser"/>   
   <confirm-modal v-if="showConfirmDialog" @hideConfirmDialogEvt="showConfirmDialog=false" @confirmResponse="confirmDeleteUser()" :message="confirmDialogText"/>
+  <alert-modal v-if="showAlertDialog" :messageType="dialogAlertMessageType" :message="alertDialogText" @closeAlert="showAlertDialog=false"/>
 </template>
 
 
 <script>
-import { mapActions } from "vuex"
-import { emptyUser, createUser } from '../helpers'
+import { mapActions, mapGetters } from "vuex"
+import { emptyUser, createUser, alertModalErrorTypes } from '../helpers'
 import EditUser from '../components/EditUser.vue'
 import ConfirmModal from '../components/ConfirmModal.vue'
+import AlertModal from '../components/AlertModal.vue'
 
 export default {
   components: {
     'edit-user' : EditUser,
-    'confirm-modal' : ConfirmModal
+    'confirm-modal' : ConfirmModal,
+    'alert-modal' : AlertModal
   },  
   data() {
     return {
       showModal : false,
       showConfirmDialog : false,
       confirmDialogText : "",
+      showAlertDialog : false,
+      dialogAlertMessageType : alertModalErrorTypes.DEFAULT,
+      alertDialogText : "",
       user : emptyUser(),
       isNewUser : false,
       searchTerm : ""
     }
   },
-  watch:{
-
-  },
-  computed: {    
+  computed: {
+    ...mapGetters({error: 'moduleUsers/error'}),
     users(){
       let usersSorted = this.$store.getters["moduleUsers/users"] 
-      if (this.searchTerm.length > 1){
+      if (this.searchTerm.length >= 1){
         return usersSorted.filter(entry => findUserOrNameOrSurname(entry, this.searchTerm.toLowerCase()))
           .sort( (a,b) => a.user.localeCompare(b.user))
       }else{
@@ -108,6 +112,14 @@ export default {
     async confirmDeleteUser(){
       this.showConfirmDialog = false
       await this.deleteUser(this.user.user)
+      
+      //preguntar si hubo error y mostrarlo en el siguiente dialog
+      if (this.error.hasError){
+        this.dialogAlertMessageType = alertModalErrorTypes.ERROR
+        this.alertDialogText = this.error.i18nMsg
+        this.showAlertDialog = true
+      }      
+      
     }
   },
   async created() {
