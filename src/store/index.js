@@ -23,8 +23,8 @@ export const store = createStore({
         setAuthenticatedStatus:(state, payload) => {
             state.authenticated = payload.status
         },
-        isLoading(state, value){
-            state.isLoading = value
+        isLoading(state, payload){
+            state.isLoading = payload.status
         },
         resetState(state){
             const s = initialState()

@@ -26,6 +26,11 @@
             />
           </div>
         </div>
+        <div class="row my-3">
+          <div class="col-md-12 text-center">
+              <p class="text-danger" v-if="error.hasError">{{error.i18nMsg}}</p>
+          </div>
+        </div>
         <div class="row mt-3">
           <div class="col-md-12 form-group text-center">
             <button
@@ -34,8 +39,8 @@
               @click="authenticate()"
             >
               Entrar
-            </button>
-            <div class="text-center text-muted pt-2"><small>v1.0</small></div>
+            </button>            
+            <div class="text-center pt-2"><small class="custom-version">v1.0</small></div>
           </div>
         </div>
       </form>
@@ -44,24 +49,26 @@
 </template>
 
 <script>
-import { mapActions } from "vuex"
+import { mapActions, mapGetters } from "vuex"
 
 export default {
   data() {
     return {
       user: "admin",
-      pass: "admin",
+      pass: "admin"
     }
   },
+  computed:{
+    ...mapGetters({error: 'moduleUsers/error'})
+  },
   mounted() {
-    document.title =
-      this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_LOGIN")
+    document.title =  this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_LOGIN")
+    this.clearError()
   },
   methods: {
     ...mapActions({
       login: "moduleUsers/login",
-      dmsInfo: "moduleUsers/dmsInfo",
-      setLoading: "isLoading",
+      clearError : "moduleUsers/clearError" 
     }),
     idioma(idioma) {
       if (idioma === "en") {
@@ -75,16 +82,8 @@ export default {
         user: this.user,
         pass: this.pass,
       }
-      try {
-        this.setLoading(true)
-        await this.login(payload)
-        await this.dmsInfo()
-        this.setLoading(false)
-
-        this.$router.push("/")
-      } catch (error) {
-        console.log(error)
-      }
+      await this.login(payload)
+      this.$router.push("/")
     },
   },
 }
@@ -95,5 +94,10 @@ export default {
   width: 320px;
   max-width: 100%;
   margin: 80px auto;
+}
+.custom-version{
+  font-size: smaller;
+  font-weight: lighter;
+  color:lightgrey;
 }
 </style>

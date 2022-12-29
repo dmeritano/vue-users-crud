@@ -62,7 +62,6 @@ export default {
       user : emptyUser(),
       isNewUser : false,
       searchTerm : ""
-      //users : this.$store.getters["moduleUsers/users"] 
     }
   },
   watch:{
@@ -83,13 +82,12 @@ export default {
     document.title =
       this.$t("HTML_HEAD_TITLE_BASE") +
       " - " +
-      this.$t("HTML_HEAD_TITLE_HOMEPAGE")
+      this.$t("HTML_HEAD_TITLE_HOMEPAGE")      
   },
   methods: {
     ...mapActions({
       getUsers: "moduleUsers/getUsers",
-      deleteUser : "moduleUsers/deleteUser",
-      setLoading: "isLoading"
+      deleteUser : "moduleUsers/deleteUser"
     }),
     editUser(index){
       //this.user = this.users[index] - NOOO - no queremos que queden bindeados
@@ -109,14 +107,12 @@ export default {
     },
     async confirmDeleteUser(){
       this.showConfirmDialog = false
-      this.setLoading(true)
       await this.deleteUser(this.user.user)
-      this.setLoading(false)
     }
-  },  
-  created() {
+  },
+  async created() {
     //Esto tambien podria hacer luego del login exitoso y no aqui
-    this.getUsers()
+    await this.getUsers()
   },
 }
 

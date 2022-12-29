@@ -1,11 +1,14 @@
 <template> 
-  <footer class="text-center">
-    <div class="my-5 py-5">
+  <footer class="text-center custom-footer">
+    <div class="">
       <small class="text-muted">{{$t("FOOTER_LINE1")}}</small>   
     </div>
     
   </footer>   
 </template>
 
-<script>
-</script>
+<style scoped>
+.custom-footer{
+  margin-top: 150px;
+}
+</style>

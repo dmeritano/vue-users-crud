@@ -1,29 +1,32 @@
 import apiDms from "@/services/service-apidms"
+import { getErrorResponse } from '../../helpers'
 
 function initialState () {
   return {
     dmsInfo:{},
-    users:[]
+    users:[],
+    error: getErrorResponse(null)
   }
 }
 
 const moduleUsers = {
   namespaced: true,
   state: initialState(),
-  /*
-  state: () => ({
-    dmsInfo : {},
-    users:[],
-  }),*/
   getters : {
     dmsInfo(state){
       return state.dmsInfo
     },
     users(state){
       return state.users
+    },
+    error(state){
+      return state.error
     }
   },
   mutations: {
+    setError(state, payload){
+      state.error = payload.error
+    },
     dmsInfo(state, payload){
       state.dmsInfo = payload.meta.platform + " (" + payload.meta.name + ")"
     },
@@ -64,24 +67,29 @@ const moduleUsers = {
       })      
     }
   },
-  actions: {
+  actions: {    
     async login(context, payload) {
+      context.commit("isLoading", {status:true}, { root: true })
+      context.commit("setError", {error : getErrorResponse(null) })
       await apiDms
         .login(payload)
-        .then(() => {
+        .then(() => {          
           context.commit("setAuthenticatedStatus", {status:true}, { root: true })
         })
-        .catch((error) => console.log(error))
+        .catch((error) => { 
+          context.commit("setError", {error : getErrorResponse(error) })
+        })
+        .finally( () => {
+          context.commit("isLoading", {status:false}, { root: true })
+        })        
     },
     async logout(context) {
       await apiDms
         .logout()
         .then(() => {})
         .catch( (error) => {
-          console.log("hubo un error");
           console.log(error);
-        })        
-        
+        })                
         context.commit("setAuthenticatedStatus", {status:false}, { root: true })
         context.commit("resetState", null, { root: true })
         context.commit("resetState")
@@ -95,14 +103,19 @@ const moduleUsers = {
         .catch((error) => console.log(error))
     },
     async getUsers(context) {
+      context.commit("isLoading", {status:true}, { root: true })
       await apiDms
         .getUsers()
         .then((res) => {
           context.commit("users", res.data.users)
         })
         .catch((error) => console.log(error))
+        .finally( ()=> {
+          context.commit("isLoading", {status:false}, { root: true })    
+        })    
     },
     async addUser(context, payload){
+      context.commit("isLoading", {status:true}, { root: true })    
       await apiDms
         .addUser(payload)
         .then( (res) => {
@@ -111,8 +124,12 @@ const moduleUsers = {
         .catch( (error) => {
           console.log(error);
         })
+        .finally( ()=> {
+          context.commit("isLoading", {status:false}, { root: true })    
+        })           
     },
     async updateUser(context, payload){
+      context.commit("isLoading", {status:true}, { root: true })    
       await apiDms
         .updateUser(payload)
         .then( (res) => {
@@ -121,6 +138,9 @@ const moduleUsers = {
         .catch( (error) => {
           console.log(error);
         })
+        .finally( ()=> {
+          context.commit("isLoading", {status:false}, { root: true })    
+        })                   
     },
     async deleteUser(context, username){
       await apiDms
@@ -132,12 +152,36 @@ const moduleUsers = {
         .catch((error) => {
           console.log(error);
         })
+    },
+    clearError(context){
+      context.commit("setError", {error : getErrorResponse(null) })
     }
   },
 }
 
-/*function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+/*
+function createErrorResponse(error){
+  const resp = emptyResponse()
+  
+  if (error.code == "ERR_NETWORK"){
+    resp.generalNetworkError = true,
+    resp.generalNetworkErrorMessage = i18n.global.t("APP_NETWORK_ERROR")
+    return resp
+  }
+
+  if (error.url.indexOf("authenticate") && error.method === "post"){    
+    resp.loginCredentialsError = true
+    if (error.status == "401"){      
+      resp.loginCredentialsErrorMessage = i18n.global.t("API_ERRORS_INVALID_USER_PASS")
+    }else{
+      resp.loginCredentialsErrorMessage = i18n.global.t("API_ERRORS_GENERAL")
+    }
+    return resp
+  }
+
+  
+  return resp  
 }*/
+
 
 export default moduleUsers

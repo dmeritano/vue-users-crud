@@ -28,5 +28,9 @@
   "EDITUSER_VALIDATION_PASSWORD" : "Password is required",
   "EDITUSER_ERRORS_WARNING" : "Please, check following error | Please, check following errors",
   "LOGIN_MAIN_TITLE" : "User's Administration",
-  "FOOTER_LINE1" : "{'@'} ADDALIA. All rights reserved."
+  "FOOTER_LINE1" : "{'@'} ADDALIA. All rights reserved.",
+  "API_ERRORS_INVALID_USER_PASS" : "Invalid user or password",
+  "API_ERRORS_GENERAL" : "An error has occurred in the request",
+  "APP_NETWORK_ERROR" : "Connectivity error - No connection",
+  "APP_UNKNOWN_ERROR" : "Unknown error"
 }

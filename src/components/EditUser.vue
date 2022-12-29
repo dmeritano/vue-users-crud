@@ -105,8 +105,7 @@ export default {
     },
     ...mapActions({
       saveUser: "moduleUsers/addUser",
-      updateUser: "moduleUsers/updateUser",
-      setLoading: "isLoading"
+      updateUser: "moduleUsers/updateUser"
     }),
     async save(){
       this.errors = []
@@ -122,11 +121,9 @@ export default {
         }
       }
       //Create or update user
-      this.setLoading(true)
       this.isNewUser ? 
         await this.saveUser(this.currentUser) :
         await this.updateUser(this.currentUser)              
-      this.setLoading(false)
       this.hideModal()
     }
   },

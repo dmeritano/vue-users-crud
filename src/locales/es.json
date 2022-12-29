@@ -31,5 +31,9 @@
   "GENERAL_CANCEL_BTN" : "Cancelar",
   "GENERAL_CONFIRM_BTN" : "Confirmar",
   "GENERAL_SAVE_BTN" : "Guardar",
-  "FOOTER_LINE1" : "{'@'} ADDALIA. Todos los derechos reservados."
+  "FOOTER_LINE1" : "{'@'} ADDALIA. Todos los derechos reservados.",
+  "API_ERRORS_INVALID_USER_PASS" : "Usuario o contraseña incorrecto",
+  "API_ERRORS_GENERAL" : "Ha ocurrido un error en la petición",
+  "APP_NETWORK_ERROR" : "Error de conectividad - No hay conexión",
+  "APP_UNKNOWN_ERROR" : "Error desconocido"
 }
