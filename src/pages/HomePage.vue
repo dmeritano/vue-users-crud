@@ -8,7 +8,7 @@
       </div>
       <div class="col mb-3 pe-3">
         <div class="d-flex flex-row-reverse">
-          <input type="text" class="form-control search-input custom-input" v-model="searchTerm" :placeholder="$t('HOME_SEARCH_BOX')" @keyup="search"/>
+          <input type="text" ref="searchBox" class="form-control search-input custom-input" v-model="searchTerm" :placeholder="$t('HOME_SEARCH_BOX')" @keyup="search"/>
         </div>        
       </div>  
     </div>
@@ -38,7 +38,7 @@
     </div>
   </div>
   
-  <edit-user v-if="showModal" @hideModalEvt="showModal=false" :currentUser="user" :isNewUser="isNewUser"/>   
+  <edit-user v-if="showModal" @hideModalEvt="hideEditModal" :currentUser="user" :isNewUser="isNewUser"/>   
   <confirm-modal v-if="showConfirmDialog" @hideConfirmDialogEvt="showConfirmDialog=false" @confirmResponse="confirmDeleteUser()" :message="confirmDialogText"/>
   <alert-modal v-if="showAlertDialog" :messageType="dialogAlertMessageType" :message="alertDialogText" @closeAlert="showAlertDialog=false"/>
 </template>
@@ -118,8 +118,11 @@ export default {
         this.dialogAlertMessageType = alertModalErrorTypes.ERROR
         this.alertDialogText = this.error.i18nMsg
         this.showAlertDialog = true
-      }      
-      
+      }            
+    },
+    hideEditModal(){
+      this.showModal = false
+      this.$refs.searchBox.focus()
     }
   },
   async created() {

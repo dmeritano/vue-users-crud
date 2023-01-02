@@ -28,7 +28,8 @@ export function createUser(payload){
 const emptyErrorResponse = {    
     hasError : false,
     message: i18n.global.t("APP_UNKNOWN_ERROR"),
-    i18nMsg: ""    
+    i18nMsg: "",
+    errorAtrilSessionNotPresent : false    
 }
 
 export function getErrorResponse(error){
@@ -79,6 +80,8 @@ export function getErrorResponse(error){
       }
       return resp    
     }
+
+    /*Atril Session not present -> Se trata en axios-config.js*/ 
 
     return resp  
 }

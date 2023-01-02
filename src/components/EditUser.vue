@@ -30,6 +30,7 @@
                 type="text"
                 class="form-control custom-input"
                 v-model="user.user"
+                ref="username"
                 :disabled="isDisabled"
               />
             </div>
@@ -41,6 +42,7 @@
                 type="text"
                 class="form-control custom-input"
                 v-model="user.name"
+                ref="name"
               />
             </div>
           </div>
@@ -102,13 +104,6 @@ export default {
     getErrors(){
       let resp = {...this.errors}
       return resp
-      /*
-      if (this.getApiError.hasError){
-        resp.push(this.getApiError.i18nMsg)
-        return resp
-      }else{
-        return resp  
-      }*/
     }
   },
   methods: {
@@ -140,13 +135,17 @@ export default {
         
       if (this.getApiError.hasError){
         this.errors.push(this.getApiError.i18nMsg)
-        console.log(this.getApiError);
       }else{
         this.hideModal()
-      }
-      
+      }      
     }
   },
+  mounted(){
+    this.isNewUser ?
+      this.$refs.username.focus() :
+      this.$refs.name.focus()
+
+  }
 }
 
 </script>

@@ -1,14 +1,6 @@
-TODO
-----
+TO-DO
+==============
 
-
-
-
---COMUNICACION DE ERRORES AXIOS AL COMPONENTE PARA INFORMAR AL USUARIO
---TRATAMIENTO ERRORES AXIOS-
-
-problemas despues de un tiempo (30 min ?) de estar conectado con las operaciones
-que siguen ...  es como si se perdiera la cookie (que nunca encontré - capaz que hay que recueperarla en el login, no se)
-los problema son al querer desconectar por ejemplo, que aveces da error 404  ( ... si, no da 401 lo cual tendria sentido )
-
-..
+Tratar error al obtener lista de usuarios.
+Ver donde conviene cargar los usuarios (seguimos en mounted de homepage? )
+Ver si hay otros errores sin tratar en store

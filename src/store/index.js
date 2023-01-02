@@ -36,10 +36,6 @@ export const store = createStore({
     actions:{
         isLoading(context, value){
             context.commit("isLoading", value)
-        },
-        clearAll(context){
-            context.commit("reset")
-            context.commit("moduleUsers/reset")
         }
     },
     modules:{

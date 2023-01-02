@@ -24,11 +24,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <!--
-          <button type="button" class="btn btn-secondary" @click="$emit('hideConfirmDialogEvt')">
-            {{$t("GENERAL_CANCEL_BTN")}}
-          </button>
-          -->
           <button type="button" class="btn btn-default" @click="$emit('closeAlert')">{{$t("GENERAL_CONFIRM_BTN")}}</button>
         </div>
       </div>

@@ -90,9 +90,9 @@ const moduleUsers = {
         .catch( (error) => {
           console.log(error);
         })                
-        context.commit("setAuthenticatedStatus", {status:false}, { root: true })
-        context.commit("resetState", null, { root: true })
-        context.commit("resetState")
+          context.commit("setAuthenticatedStatus", {status:false}, { root: true })
+          context.commit("resetState", null, { root: true })
+          context.commit("resetState")
     },
     async dmsInfo(context) {
       await apiDms
@@ -123,7 +123,7 @@ const moduleUsers = {
           context.commit("addUser", res.data)
         })
         .catch( (error) => {
-          context.commit("setError", {error : getErrorResponse(error) })
+          context.commit("setError", {error : getErrorResponse(error) })                    
         })
         .finally( ()=> {
           context.commit("isLoading", {status:false}, { root: true })    
@@ -164,5 +164,6 @@ const moduleUsers = {
     }
   },
 }
+
 
 export default moduleUsers

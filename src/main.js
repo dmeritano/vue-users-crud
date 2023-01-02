@@ -1,7 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-//import { createRouter, createWebHistory } from 'vue-router'
-//import { routes } from './router/routes'
 import { router } from './router'
 import { store } from './store'
 import makeEnvConfig from './services/service-config'
@@ -15,14 +13,6 @@ import 'bootstrap/dist/js/bootstrap.min'
 
 //Global styles
 import '@/assets/css/global.css';
-
-/*
-
-const router = createRouter({
-    history: createWebHistory(),
-    routes,
-})
-*/
 
 router.beforeEach( (to, from, next) => {
     if (to.matched.some(route => route.meta.requiresAuth)){
@@ -44,12 +34,7 @@ makeEnvConfig().then(
         const EnvConfig = response
         const app = createApp(App)
         app.config.globalProperties.$EnvConfig = EnvConfig
-
         createDmsClientInstance(EnvConfig.serviceBaseUrl)
-
-
-
-
         app.use(router)
         app.use(store)
         app.use(i18n)

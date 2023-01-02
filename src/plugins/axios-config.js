@@ -1,6 +1,6 @@
 import axios from "axios"
-//import { router } from '../router'
-//import { store } from '../store'
+import { router } from '../router'
+import { store } from '../store'
 
 let dmsClient = null
 let otherServiceApiClient = null
@@ -28,8 +28,7 @@ export function createDmsClientInstance(baseURL) {
       return response
     },
     function (error) {
-      console.log(error);
-      var hasResponse = "response" in error
+      const hasResponse = "response" in error
       const data = {
         status: hasResponse ? error.response.status : "",
         message: error.message,
@@ -38,7 +37,20 @@ export function createDmsClientInstance(baseURL) {
         method: error.config.method,
         responseData: hasResponse ? error.response.data : ""
       }
-      return Promise.reject(data)
+
+      //Controlling "Atril session not present" por desconexion
+      if (data.status == "401"){
+        if (data.responseData.status == "0001"){
+          const clear = async () => {
+            console.log("1");
+            await store.dispatch("moduleUsers/logout")            
+            router.push("/login")
+          }
+          clear()            
+        }       
+      }else{
+        return Promise.reject(data)
+      }     
     }
   )
 }
