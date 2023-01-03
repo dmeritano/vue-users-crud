@@ -39,6 +39,8 @@
   "API_ERRORS_USER_EXIST" : "El nombre de usuario ya existe",
   "API_ERRORS_USER_NOT_EXIST" : "Usuario ya fue eliminado desde otra aplicación/terminal",
   "API_ERRORS_USER_COULD_NOT_UPDATE_PASSWORD" : "No se pudo actualizar la contraseña",
+  "API_ERRORS_COULD_NOT_GET_USERS" : "No se pudo obtener la lista de usuarios",
   "APP_NETWORK_ERROR" : "Error de conectividad - No hay conexión",
+  "APP_BADREQUEST_ERROR" : "Error en la petición al servidor",
   "APP_UNKNOWN_ERROR" : "Error desconocido"
 }

@@ -87,12 +87,11 @@ const moduleUsers = {
       await apiDms
         .logout()
         .then(() => {})
-        .catch( (error) => {
-          console.log(error);
-        })                
-          context.commit("setAuthenticatedStatus", {status:false}, { root: true })
-          context.commit("resetState", null, { root: true })
-          context.commit("resetState")
+        .catch( () => {})                
+          
+        context.commit("setAuthenticatedStatus", {status:false}, { root: true })
+        context.commit("resetState", null, { root: true })
+        context.commit("resetState")
     },
     async dmsInfo(context) {
       await apiDms
@@ -104,12 +103,15 @@ const moduleUsers = {
     },
     async getUsers(context) {
       context.commit("isLoading", {status:true}, { root: true })
+      context.commit("setError", {error : getErrorResponse(null) })
       await apiDms
         .getUsers()
         .then((res) => {
           context.commit("users", res.data.users)
         })
-        .catch((error) => console.log(error))
+        .catch( (error) => {
+          context.commit("setError", {error : getErrorResponse(error) })                    
+        })
         .finally( ()=> {
           context.commit("isLoading", {status:false}, { root: true })    
         })    

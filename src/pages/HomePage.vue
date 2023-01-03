@@ -86,7 +86,7 @@ export default {
     document.title =
       this.$t("HTML_HEAD_TITLE_BASE") +
       " - " +
-      this.$t("HTML_HEAD_TITLE_HOMEPAGE")      
+      this.$t("HTML_HEAD_TITLE_HOMEPAGE")     
   },
   methods: {
     ...mapActions({
@@ -125,10 +125,19 @@ export default {
       this.$refs.searchBox.focus()
     }
   },
-  async created() {
-    //Esto tambien podria hacer luego del login exitoso y no aqui
-    await this.getUsers()
-  },
+  created() {
+    //Esto tambien podria hacer luego del login exitoso y no aqui    
+    const loadUsers = async () => {
+      await this.getUsers()
+      if (this.error.hasError){
+        console.log("averga");
+        this.dialogAlertMessageType = alertModalErrorTypes.ERROR
+        this.alertDialogText = this.error.i18nMsg
+        this.showAlertDialog = true
+      }        
+    }
+    loadUsers()
+  }
 }
 
 function findUserOrNameOrSurname(current, searchTerm){

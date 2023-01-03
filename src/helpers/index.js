@@ -73,12 +73,20 @@ export function getErrorResponse(error){
       if (error.responseData != ""){
         if (error.responseData.status == "0022"){
           resp.i18nMsg = i18n.global.t("API_ERRORS_USER_NOT_EXIST")
+        }else if (error.url.indexOf("users") >0 && error.method === "get"){   
+            /* users list */
+            resp.i18nMsg = i18n.global.t("API_ERRORS_COULD_NOT_GET_USERS")
         }else{
           //Tratar otros codigo de error del api. Por ahora queda lo que viene en response.data
           resp.i18nMsg = error.responseData.message //Sin traduccion
         }
       }
       return resp    
+    }
+
+    if (error.code == "ERR_BAD_REQUEST"){
+      resp.i18nMsg = i18n.global.t("APP_BADREQUEST_ERROR")
+      return resp      
     }
 
     /*Atril Session not present -> Se trata en axios-config.js*/ 

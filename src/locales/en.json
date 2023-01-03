@@ -39,6 +39,8 @@
   "API_ERRORS_USER_EXIST" : "User already exists",
   "API_ERRORS_USER_NOT_EXIST" : "User was already deleted from another application/terminal",
   "API_ERRORS_USER_COULD_NOT_UPDATE_PASSWORD" : "Could not update password",
+  "API_ERRORS_COULD_NOT_GET_USERS" : "Could not get user list",
   "APP_NETWORK_ERROR" : "Connectivity error - No connection",
+  "APP_BADREQUEST_ERROR" : "Bad request error",
   "APP_UNKNOWN_ERROR" : "Unknown error"
 }
