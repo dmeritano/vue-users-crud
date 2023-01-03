@@ -1,4 +1,5 @@
 {
+  "APP_SHORT_NAME" : "DMS-USERS-CRUD",
   "HTML_HEAD_TITLE_BASE" : "User's Administration",
   "HTML_HEAD_TITLE_LOGIN" : "Login",
   "HTML_HEAD_TITLE_HOMEPAGE" : "Home",
@@ -18,6 +19,9 @@
   "HOME_TABLE_EDIT_BTN" : "Edit",
   "HOME_TABLE_DELETE_BTN" : "Delete",
   "HOME_DELETE_USER_CONFIRMATION" : "Confirm that you want to delete the user '{user}' ?",
+  "ABOUTPAGE_MAIN_TITLE" : "About",
+  "ABOUTPAGE_TEXT_1" : "<b>{appname}</b> solution allows to manage the users of the system, implementing the add, edit and delete functions.",  
+  "ABOUTPAGE_TEXT_VERSION" : "Version: {version}",
   "EDITUSER_TITLE_CREATE" : "New user",
   "EDITUSER_TITLE_EDIT" : "Edit user",
   "EDITUSER_USERNAME" : "Username",

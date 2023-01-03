@@ -5,7 +5,9 @@ import moduleUsers from './modules/users'
 function initialState () {
     return {
       authenticated:false,
-      isLoading:false
+      loggedInUser: "",
+      isLoading:false,
+      version: require('../../package.json').version
     }
   }
 
@@ -17,11 +19,20 @@ export const store = createStore({
         },
         isLoading(state){
             return state.isLoading
+        },
+        user(state){
+            return state.loggedInUser
+        },
+        version(state){
+            return state.version
         }
     },
     mutations:{
         setAuthenticatedStatus:(state, payload) => {
             state.authenticated = payload.status
+        },
+        setLoggedUser:(state, payload) => {
+            state.loggedInUser = payload.userData.user
         },
         isLoading(state, payload){
             state.isLoading = payload.status

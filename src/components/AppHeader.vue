@@ -20,6 +20,9 @@
           <li class="nav-item">
             <router-link to="/" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
           </li>
+          <li class="nav-item" v-if="showAboutPage">
+            <router-link to="/about" class="nav-link">About</router-link>
+          </li>          
         </ul>
         <ul class="navbar-nav me-5">
           <li class="nav-item dropdown">
@@ -67,13 +70,17 @@ import { mapActions } from 'vuex'
 export default {
   data() {
     return {
-      flag : ""
+      flag : "",
+      showAboutPage : this.$EnvConfig.showAboutPage
     }    
   },  
   computed: {
     authenticated() {
       return this.$store.getters.authenticated
     },
+    showAbout(){
+      return this.$Env
+    }
   },
   methods: {
     ...mapActions({      

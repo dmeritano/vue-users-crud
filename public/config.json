@@ -1,4 +1,6 @@
 {
     "showAppFooter" : true,
-    "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411"
+    "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411",
+    "showAboutPage" : true,
+    "allowedUsers" : ["admin", "usuario1"]
 }

@@ -40,7 +40,7 @@
             >
               Entrar
             </button>            
-            <div class="text-center pt-2"><small class="custom-version">v1.0</small></div>
+            <div class="text-center pt-2"><small class="custom-version">v{{appVersion}}</small></div>
           </div>
         </div>
       </form>
@@ -51,15 +51,17 @@
 <script>
 import { mapActions, mapGetters } from "vuex"
 
+
 export default {
   data() {
     return {
       user: "",
-      pass: ""
+      pass: "",
     }
   },
   computed:{
-    ...mapGetters({error: 'moduleUsers/error'})
+    ...mapGetters({error: 'moduleUsers/error'}),
+    ...mapGetters({appVersion: 'version'})
   },
   mounted() {
     document.title =  this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_LOGIN")

@@ -1,4 +1,5 @@
 {
+  "APP_SHORT_NAME" : "DMS-USERS-CRUD",
   "HTML_HEAD_TITLE_BASE" : "Administracion de Usuarios",
   "HTML_HEAD_TITLE_LOGIN" : "Login",
   "HTML_HEAD_TITLE_HOMEPAGE" : "Inicio",
@@ -18,6 +19,9 @@
   "HOME_TABLE_EDIT_BTN" : "Editar",
   "HOME_TABLE_DELETE_BTN" : "Eliminar",
   "HOME_DELETE_USER_CONFIRMATION" : "¿Confirma que quiere borrar al usuario '{user}' ?",
+  "ABOUTPAGE_MAIN_TITLE" : "Acerca de",
+  "ABOUTPAGE_TEXT_1" : "La solución <b>{appname}</b> permite administrar los usuarios del sistema, implementando las funciones de altas, bajas y modificaciones.",
+  "ABOUTPAGE_TEXT_VERSION" : "Versión: {version}",
   "EDITUSER_TITLE_CREATE" : "Crear nuevo usuario",
   "EDITUSER_TITLE_EDIT" : "Editar usuario",
   "EDITUSER_USERNAME" : "Usuario",

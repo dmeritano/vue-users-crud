@@ -72,6 +72,7 @@ export default {
   },
   computed: {
     ...mapGetters({error: 'moduleUsers/error'}),
+    ...mapGetters({userName: 'user'}),
     users(){
       let usersSorted = this.$store.getters["moduleUsers/users"] 
       if (this.searchTerm.length >= 1){
@@ -80,18 +81,21 @@ export default {
       }else{
         return usersSorted.sort( (a,b) => a.user.localeCompare(b.user))
       }      
+    },
+    allowedUsers(){
+      return this.$EnvConfig.allowedUsers
     }
   },
   mounted() {
     document.title =
       this.$t("HTML_HEAD_TITLE_BASE") +
       " - " +
-      this.$t("HTML_HEAD_TITLE_HOMEPAGE")     
+      this.$t("HTML_HEAD_TITLE_HOMEPAGE")       
   },
   methods: {
     ...mapActions({
       getUsers: "moduleUsers/getUsers",
-      deleteUser : "moduleUsers/deleteUser"
+      deleteUser : "moduleUsers/deleteUser"      
     }),
     editUser(index){
       //this.user = this.users[index] - NOOO - no queremos que queden bindeados
@@ -126,17 +130,18 @@ export default {
     }
   },
   created() {
-    //Esto tambien podria hacer luego del login exitoso y no aqui    
-    const loadUsers = async () => {
-      await this.getUsers()
-      if (this.error.hasError){
-        console.log("averga");
-        this.dialogAlertMessageType = alertModalErrorTypes.ERROR
-        this.alertDialogText = this.error.i18nMsg
-        this.showAlertDialog = true
-      }        
+    //Esto tambien podria hacer luego del login exitoso y no aqui
+    if (authorizedUser(this.userName,this.allowedUsers)){
+      const loadUsers = async () => {
+        await this.getUsers()
+        if (this.error.hasError){
+          this.dialogAlertMessageType = alertModalErrorTypes.ERROR
+          this.alertDialogText = this.error.i18nMsg
+          this.showAlertDialog = true
+        }        
+      }
+      loadUsers()
     }
-    loadUsers()
   }
 }
 
@@ -146,7 +151,15 @@ function findUserOrNameOrSurname(current, searchTerm){
     current.surname.toLowerCase().includes(searchTerm)
   )
 }
+function authorizedUser(username, allowedUsers){
+  const isContained = allowedUsers.some(element => {
+    return element.toLowerCase() === username.toLowerCase();
+  });
+  return isContained
+}
 </script>
+
+
 <style scoped>
 .btn-actions-w{
   width: 80px;

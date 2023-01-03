@@ -74,7 +74,8 @@ const moduleUsers = {
       await apiDms
         .login(payload)
         .then(() => {          
-          context.commit("setAuthenticatedStatus", {status:true}, { root: true })
+          context.commit("setAuthenticatedStatus", {status:true}, { root: true })          
+          context.commit("setLoggedUser", {userData: payload}, { root: true })
         })
         .catch((error) => { 
           context.commit("setError", {error : getErrorResponse(error) })

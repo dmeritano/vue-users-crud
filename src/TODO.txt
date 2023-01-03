@@ -1,6 +1,8 @@
 TO-DO
 ==============
 
-Tratar error al obtener lista de usuarios.
-Ver donde conviene cargar los usuarios (seguimos en mounted de homepage? )
-Ver si hay otros errores sin tratar en store
+Página About DONE 
+
+No tiene permiso para administrar la lista de usuarios  DONE
+
+
