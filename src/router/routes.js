@@ -6,5 +6,5 @@ export const routes = [
     { path: '/login', component: LoginPage},
     { path: '/about', component: AboutPage},
     { path: '/home', component: HomePage, meta: { requiresAuth: true } },
-    { path: '/:pathMatch(.*)', redirect:'/home'}
+    { path: '/:pathMatch(.*)*', redirect:'/home'}
 ]
