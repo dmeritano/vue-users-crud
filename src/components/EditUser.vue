@@ -49,8 +49,15 @@
           <div class="row mb-3">
             <label class="col-sm-4 col-form-label">{{$t("EDITUSER_SURNAME")}}</label>
             <div class="col-sm-8">
+              <!-- TRICK para evitar autocompletado de los navegadores 
+                  readonly
+                  onfocus="this.removeAttribute('readonly');"
+                  Poniendolo en este campo tambien me soluciona el autocomplete del campo siguiente (pass)            
+                -->              
               <input
                 type="text"
+                readonly
+                onfocus="this.removeAttribute('readonly');"
                 class="form-control custom-input"
                 v-model="user.surname"
               />
@@ -68,10 +75,10 @@
           </div>           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" @click="hideModal()">
+          <button type="button" class="btn btn-secondary buttons-fixed-width" @click="hideModal()">
             {{$t("GENERAL_CANCEL_BTN")}}
           </button>
-          <button type="button" class="btn btn-default" @click="save()">{{$t("GENERAL_SAVE_BTN")}}</button>
+          <button type="button" class="btn btn-default buttons-fixed-width" @click="save()">{{$t("GENERAL_SAVE_BTN")}}</button>
         </div>
       </div>
     </div>

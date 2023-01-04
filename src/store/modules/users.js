@@ -85,10 +85,14 @@ const moduleUsers = {
         })        
     },
     async logout(context) {
+      context.commit("isLoading", {status:true}, { root: true })
       await apiDms
         .logout()
         .then(() => {})
-        .catch( () => {})                
+        .catch( () => {})
+        .finally( () => {
+          context.commit("isLoading", {status:false}, { root: true })
+        })             
           
         context.commit("setAuthenticatedStatus", {status:false}, { root: true })
         context.commit("resetState", null, { root: true })

@@ -4,6 +4,7 @@
   "HTML_HEAD_TITLE_LOGIN" : "Login",
   "HTML_HEAD_TITLE_HOMEPAGE" : "Inicio",
   "HEADER_HOME_LINK" : "Inicio",
+  "HEADER_ABOUT_LINK" : "Acerca de",
   "HEADER_LOGIN_LINK" : "Identificarse",
   "HEADER_LOGOUT_LINK" : "Desconectarse",
   "HEADER_LOCALE_SHORT_NAME" : "ES",

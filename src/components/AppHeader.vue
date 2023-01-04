@@ -21,7 +21,7 @@
             <router-link to="/" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
           </li>
           <li class="nav-item" v-if="showAboutPage">
-            <router-link to="/about" class="nav-link">About</router-link>
+            <router-link to="/about" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
           </li>          
         </ul>
         <ul class="navbar-nav me-5">
@@ -87,7 +87,6 @@ export default {
       setLoading: "isLoading"
     }),    
     async logout() {
-      this.setLoading(true)
       await this.$store.dispatch("moduleUsers/logout")      
       this.$router.push("/login")
     },

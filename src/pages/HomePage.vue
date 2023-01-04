@@ -28,9 +28,9 @@
             <td>{{entry.name}}</td>
             <td>{{entry.surname}}</td>
             <td>
-              <button class="btn btn-sm btn-default btn-actions-w" @click="editUser(index)">{{$t("HOME_TABLE_EDIT_BTN")}}</button>
+              <button class="btn btn-sm btn-default buttons-fixed-width" @click="editUser(index)">{{$t("HOME_TABLE_EDIT_BTN")}}</button>
               &nbsp;
-              <button class="btn btn-sm btn-secondary btn-actions-w" @click="deleteUserIntent(index)">{{$t("HOME_TABLE_DELETE_BTN")}}</button>
+              <button class="btn btn-sm btn-secondary buttons-fixed-width" @click="deleteUserIntent(index)">{{$t("HOME_TABLE_DELETE_BTN")}}</button>
             </td>
           </tr>          
         </tbody>
@@ -161,10 +161,10 @@ function authorizedUser(username, allowedUsers){
 
 
 <style scoped>
-.btn-actions-w{
-  width: 80px;
-}
 .search-input{
   width: 200px;
+}
+.btn-secondary:hover{
+  color:red;
 }
 </style>

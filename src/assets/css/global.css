@@ -18,6 +18,10 @@ body {
 	border: none;
 }
 
+.btn-secondary{
+	border: none;
+}
+
 .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
 	opacity: 1;
 	color: #FFFFFF;
@@ -27,6 +31,13 @@ body {
 }
 
 .btn-default:hover {
+	color: #333;
+	background-color: #e6e6e6;
+	color: #FFFFFF;
+	background-color: #b2b2b2;
+}
+
+.btn-secondary:hover {
 	color: #333;
 	background-color: #e6e6e6;
 	color: #FFFFFF;
@@ -47,5 +58,9 @@ body {
 	border-radius: 30px;
 }
 
+
+.buttons-fixed-width{
+	width: 80px;
+}
 
 

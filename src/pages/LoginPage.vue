@@ -6,8 +6,15 @@
       <form class="login-form" @submit.prevent>
         <div class="row">
           <div class="col-md-12 form-group">
+            <!-- TRICK para evitar autocompletado de los navegadores 
+                readonly
+                onfocus="this.removeAttribute('readonly');"
+                Poniendolo en este campo tambien me soluciona el autocomplete del campo siguiente (pass)            
+              -->             
             <input
               type="text"
+              readonly
+              onfocus="this.removeAttribute('readonly');"
               class="form-control custom-input"
               id="user"
               v-model="user"
