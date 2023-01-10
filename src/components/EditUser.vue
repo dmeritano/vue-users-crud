@@ -17,12 +17,18 @@
           </h1>
         </div>
         <div class="modal-body">
-            <p v-if="errors.length">
-              <b>{{$t("EDITUSER_ERRORS_WARNING",errors.length)}}:</b>
-              <ul>
-                <li v-for="(entry, index) in errors" :key="index" class="text-danger">{{ entry }}</li>
-              </ul>
-          </p>
+          <div v-if="errors.length">
+            <b>{{ $t("EDITUSER_ERRORS_WARNING", errors.length) }}:</b>
+            <ul>
+              <li
+                v-for="(entry, index) in errors"
+                :key="index"
+                class="text-danger"
+              >
+                {{ entry }}
+              </li>
+            </ul>
+          </div>
           <div class="row mb-3">
             <label class="col-sm-4 col-form-label">{{$t("EDITUSER_USERNAME")}}</label>
             <div class="col-sm-8">
@@ -78,7 +84,9 @@
           <button type="button" class="btn btn-secondary buttons-fixed-width" @click="hideModal()">
             {{$t("GENERAL_CANCEL_BTN")}}
           </button>
-          <button type="button" class="btn btn-default buttons-fixed-width" @click="save()">{{$t("GENERAL_SAVE_BTN")}}</button>
+          <button type="button" class="btn btn-default buttons-fixed-width" @click="save()">
+            {{$t("GENERAL_SAVE_BTN")}}
+          </button>
         </div>
       </div>
     </div>
@@ -151,10 +159,8 @@ export default {
     this.isNewUser ?
       this.$refs.username.focus() :
       this.$refs.name.focus()
-
   }
 }
-
 </script>
 
 <style scoped></style>

@@ -1,8 +1,2 @@
 TO-DO
 ==============
-
-Página About DONE 
-
-No tiene permiso para administrar la lista de usuarios  DONE
-
-

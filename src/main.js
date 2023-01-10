@@ -6,7 +6,6 @@ import makeEnvConfig from './services/service-config'
 import i18n from './i18n'
 import { createDmsClientInstance } from './plugins/axios-config'
 
-
 //Bootstraop 5.x
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
@@ -14,6 +13,7 @@ import 'bootstrap/dist/js/bootstrap.min'
 //Global styles
 import '@/assets/css/global.css';
 
+//Configure router
 router.beforeEach( (to, from, next) => {
     if (to.matched.some(route => route.meta.requiresAuth)){
         if(!store.getters.authenticated){

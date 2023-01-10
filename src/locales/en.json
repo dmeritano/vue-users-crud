@@ -33,6 +33,7 @@
   "EDITUSER_VALIDATION_PASSWORD" : "Password is required",
   "EDITUSER_ERRORS_WARNING" : "Please, check following error | Please, check following errors",
   "LOGIN_MAIN_TITLE" : "User's Administration",
+  "LOGIN_ENTER_BTN" : "Login",
   "CONFIRM_DIALOG_TITLE" : "Information",
   "ALERT_DIALOG_TITLE" : "Information",
   "GENERAL_CANCEL_BTN" : "Cancel",

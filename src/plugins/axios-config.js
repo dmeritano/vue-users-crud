@@ -14,15 +14,12 @@ export function createDmsClientInstance(baseURL) {
   })
   dmsClient.interceptors.request.use(
     function (config) {
-      // Do something before request is sent
-      // Por ejemplo, agregar el bearer token, si hay
       return config
     },
     function (error) {
       return Promise.reject(error)
     }
   )
-
   dmsClient.interceptors.response.use(
     (response) => {
       return response
@@ -41,8 +38,8 @@ export function createDmsClientInstance(baseURL) {
       //Controlling "Atril session not present" por desconexion
       if (data.status == "401"){
         if (data.responseData.status == "0001"){
+          console.warn("Atril session not present. Disconnecting");       
           const clear = async () => {
-            console.log("1");
             await store.dispatch("moduleUsers/logout")            
             router.push("/login")
           }
@@ -55,6 +52,7 @@ export function createDmsClientInstance(baseURL) {
   )
 }
 
+//To consume other API, for example
 export function createOtherServiceClientInstance(baseURL) {
   otherServiceApiClient = axios.create({
     baseURL,
@@ -67,7 +65,6 @@ export function createOtherServiceClientInstance(baseURL) {
       return response
     },
     function (error) {
-      console.log(error)
       const data = {
         status: error.response.status,
         message: error.message,

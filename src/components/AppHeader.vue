@@ -21,7 +21,7 @@
             <router-link to="/" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
           </li>
           <li class="nav-item" v-if="showAboutPage">
-            <router-link to="/about" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
+            <router-link to="/about" class="nav-link">{{$t("HEADER_ABOUT_LINK")}}</router-link>
           </li>          
         </ul>
         <ul class="navbar-nav me-5">

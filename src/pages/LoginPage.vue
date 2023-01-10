@@ -45,7 +45,7 @@
               class="btn btn-default"
               @click="authenticate()"
             >
-              Entrar
+              {{$t("LOGIN_ENTER_BTN")}}
             </button>            
             <div class="text-center pt-2"><small class="custom-version">v{{appVersion}}</small></div>
           </div>
@@ -58,12 +58,11 @@
 <script>
 import { mapActions, mapGetters } from "vuex"
 
-
 export default {
   data() {
     return {
-      user: "",
-      pass: "",
+      user: null,
+      pass: null,
     }
   },
   computed:{
