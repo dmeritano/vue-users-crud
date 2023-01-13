@@ -83,7 +83,7 @@ export default {
       }      
     },
     allowedUsers(){
-      return this.$EnvConfig.allowedUsers
+      return this.$AppConfig.allowedUsers
     }
   },
   mounted() {

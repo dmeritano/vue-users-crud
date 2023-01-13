@@ -3,6 +3,6 @@ const getRuntimeConfig = async () => {
     return await runtimeConfig.json()
 }
 
-export default async function makeEnvConfig(){
+export default async function loadAppConfig(){
     return getRuntimeConfig()
 }

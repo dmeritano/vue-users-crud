@@ -61,8 +61,10 @@ import { mapActions, mapGetters } from "vuex"
 export default {
   data() {
     return {
-      user: null,
-      pass: null,
+      /*user: null,
+      pass: null,*/
+      user:"admin",
+      pass:"admin"
     }
   },
   computed:{

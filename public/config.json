@@ -2,5 +2,9 @@
     "showAppFooter" : true,
     "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411",
     "showAboutPage" : true,
-    "allowedUsers" : ["admin", "usuario1"]
+    "allowedUsers" : ["admin", "usuario1"],
+    "getUserProfileDocument" : true,
+    "userProfileDocument" : "UserProfile",
+    "userProfileLinkedField" : "user_name",
+    "userProfileDocumentSelectedFields" : ["user_name", "allow_users_crud"]
 }

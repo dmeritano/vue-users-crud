@@ -1,5 +1,8 @@
+/* eslint-disable */
+
 import apiDms from "@/services/service-apidms"
 import { getErrorResponse } from '../../helpers'
+import { appConfig } from '@/main'
 
 function initialState () {
   return {
@@ -24,7 +27,7 @@ const moduleUsers = {
     }
   },
   mutations: {
-    setError(state, payload){
+    error(state, payload){
       state.error = payload.error
     },
     dmsInfo(state, payload){
@@ -69,32 +72,57 @@ const moduleUsers = {
   },
   actions: {    
     async login(context, payload) {
-      context.commit("isLoading", {status:true}, { root: true })
-      context.commit("setError", {error : getErrorResponse(null) })
+      context.commit("loading", {status:true}, { root: true })
+      context.commit("error", {error : getErrorResponse(null) })      
       await apiDms
         .login(payload)
-        .then(() => {          
-          context.commit("setAuthenticatedStatus", {status:true}, { root: true })          
-          context.commit("setLoggedUser", {userData: payload}, { root: true })
+        .then( response => {          
+          if (appConfig.getUserProfileDocument){
+            const headers = {
+              "query": appConfig.userProfileDocument + "$" + appConfig.userProfileLinkedField + "='" + response.data.user + "'",
+              "deleted": "false"
+            }            
+            const searchProfile = async () => {
+              await apiDms.search(headers).then( response => {                
+                if (response.data.meta.total == "1"){
+                  const id = response.data.docs[0]["#Id"];
+                  const getUserDocument = async () => {
+                    await apiDms.getDocumentById(id)
+                      .then( response => {
+                        const profile = getProfileObjectWithConfiguredKeys(response.data.attributes
+                          ,appConfig.userProfileDocumentSelectedFields)
+                        context.commit("userProfile", {profile}, { root: true })               
+                      })
+                  }
+                  getUserDocument()                  
+                }else{
+                  throw new Error("no hay un perfil para el usuario")
+                }                
+              })
+            }                        
+            searchProfile()            
+          }          
+          context.commit("authenticatedStatus", {status:true}, { root: true })          
+          context.commit("loggedUser", {userData: payload}, { root: true })
         })
         .catch((error) => { 
-          context.commit("setError", {error : getErrorResponse(error) })
+          context.commit("error", {error : getErrorResponse(error) })
         })
         .finally( () => {
-          context.commit("isLoading", {status:false}, { root: true })
+          context.commit("loading", {status:false}, { root: true })
         })        
     },
     async logout(context) {
-      context.commit("isLoading", {status:true}, { root: true })
+      context.commit("loading", {status:true}, { root: true })
       await apiDms
         .logout()
         .then(() => {})
         .catch( () => {})
         .finally( () => {
-          context.commit("isLoading", {status:false}, { root: true })
+          context.commit("loading", {status:false}, { root: true })
         })             
           
-        context.commit("setAuthenticatedStatus", {status:false}, { root: true })
+        context.commit("authenticatedStatus", {status:false}, { root: true })
         context.commit("resetState", null, { root: true })
         context.commit("resetState")
     },
@@ -107,70 +135,79 @@ const moduleUsers = {
         .catch((error) => console.log(error))
     },
     async getUsers(context) {
-      context.commit("isLoading", {status:true}, { root: true })
-      context.commit("setError", {error : getErrorResponse(null) })
+      context.commit("loading", {status:true}, { root: true })
+      context.commit("error", {error : getErrorResponse(null) })
       await apiDms
         .getUsers()
         .then((res) => {
           context.commit("users", res.data.users)
         })
         .catch( (error) => {
-          context.commit("setError", {error : getErrorResponse(error) })                    
+          context.commit("error", {error : getErrorResponse(error) })                    
         })
         .finally( ()=> {
-          context.commit("isLoading", {status:false}, { root: true })    
+          context.commit("loading", {status:false}, { root: true })    
         })    
     },
     async addUser(context, payload){
-      context.commit("isLoading", {status:true}, { root: true })
-      context.commit("setError", {error : getErrorResponse(null) })
+      context.commit("loading", {status:true}, { root: true })
+      context.commit("error", {error : getErrorResponse(null) })
       await apiDms
         .addUser(payload)
         .then( (res) => {
           context.commit("addUser", res.data)
         })
         .catch( (error) => {
-          context.commit("setError", {error : getErrorResponse(error) })                    
+          context.commit("error", {error : getErrorResponse(error) })                    
         })
         .finally( ()=> {
-          context.commit("isLoading", {status:false}, { root: true })    
+          context.commit("loading", {status:false}, { root: true })    
         })           
     },
     async updateUser(context, payload){
-      context.commit("isLoading", {status:true}, { root: true })   
-      context.commit("setError", {error : getErrorResponse(null) }) 
+      context.commit("loading", {status:true}, { root: true })   
+      context.commit("error", {error : getErrorResponse(null) }) 
       await apiDms
         .updateUser(payload)
         .then( (res) => {
           context.commit("updateUser", res.data)
         })
         .catch( (error) => {
-          context.commit("setError", {error : getErrorResponse(error) })
+          context.commit("error", {error : getErrorResponse(error) })
         })
         .finally( ()=> {
-          context.commit("isLoading", {status:false}, { root: true })    
+          context.commit("loading", {status:false}, { root: true })    
         })                   
     },
     async deleteUser(context, username){
-      context.commit("isLoading", {status:true}, { root: true })   
-      context.commit("setError", {error : getErrorResponse(null) }) 
+      context.commit("loading", {status:true}, { root: true })   
+      context.commit("error", {error : getErrorResponse(null) }) 
       await apiDms
         .deleteUser(username)
         .then( () => {
           context.commit("deleteUser", username)          
         })
         .catch((error) => {
-          context.commit("setError", {error : getErrorResponse(error) })
+          context.commit("error", {error : getErrorResponse(error) })
         })
         .finally( ()=> {
-          context.commit("isLoading", {status:false}, { root: true })    
+          context.commit("loading", {status:false}, { root: true })    
         })         
     },
     clearError(context){
-      context.commit("setError", {error : getErrorResponse(null) })
+      context.commit("error", {error : getErrorResponse(null) })
     }
   },
 }
 
+function getProfileObjectWithConfiguredKeys(allFieldsObj, fieldsToInclude){  
+  let response = {}
+  for (const [key, value] of Object.entries(allFieldsObj)) {
+    if (fieldsToInclude.includes(key)){
+      response[key] = value
+    }  
+  }
+  return response
+}
 
 export default moduleUsers

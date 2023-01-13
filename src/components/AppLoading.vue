@@ -15,7 +15,7 @@ export default {
     data() { return {}},
     computed: {
         isLoading() {
-            return this.$store.getters.isLoading;
+            return this.$store.getters.loading;
         },
     },
     methods(){}

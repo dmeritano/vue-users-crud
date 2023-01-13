@@ -33,5 +33,13 @@ export default {
   async deleteUser(username){
     const url = "/dms/users/" + username
     return await dmsClient.delete(url)
-  }
+  },
+  async search(headers){
+    const url = "/dms/documents"
+    return await dmsClient.get(url, {headers})
+  },
+  async getDocumentById(id){
+    const url = "/dms/documents/" + id
+    return await dmsClient.get(url)
+  }    
 }

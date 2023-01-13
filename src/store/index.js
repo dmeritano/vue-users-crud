@@ -6,8 +6,9 @@ function initialState () {
     return {
       authenticated:false,
       loggedInUser: "",
-      isLoading:false,
-      version: require('../../package.json').version
+      userProfile : {},
+      loading:false,
+      version: require('../../package.json').version,    
     }
   }
 
@@ -17,25 +18,31 @@ export const store = createStore({
         authenticated(state){
             return state.authenticated
         },
-        isLoading(state){
-            return state.isLoading
+        loading(state){
+            return state.loading
         },
         user(state){
             return state.loggedInUser
         },
         version(state){
             return state.version
+        },
+        userProfile(state){
+            return state.userProfile
         }
     },
     mutations:{
-        setAuthenticatedStatus:(state, payload) => {
+        authenticatedStatus:(state, payload) => {
             state.authenticated = payload.status
         },
-        setLoggedUser:(state, payload) => {
+        loggedUser:(state, payload) => {
             state.loggedInUser = payload.userData.user
         },
-        isLoading(state, payload){
-            state.isLoading = payload.status
+        userProfile:(state, payload) => {
+            state.userProfile = payload.profile
+        },
+        loading(state, payload){
+            state.loading = payload.status
         },
         resetState(state){
             const s = initialState()
@@ -46,7 +53,7 @@ export const store = createStore({
     },
     actions:{
         isLoading(context, value){
-            context.commit("isLoading", value)
+            context.commit("loading", value)
         }
     },
     modules:{

@@ -11,6 +11,7 @@
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import AppLoading from './components/AppLoading.vue'
+
 export default {
   name: 'App',
   components: {
@@ -20,10 +21,9 @@ export default {
   },
   data() {
     return {
-      showAppFooter: this.$EnvConfig.showAppFooter
+      showAppFooter: this.$AppConfig.showAppFooter
     }
-  },
-  mounted() {}
+  }
 }
 </script>    
   

@@ -46,7 +46,7 @@ export function getErrorResponse(error){
       return resp
     }
   
-    if (error.url.indexOf("authenticate") >0 && error.method === "post"){          
+    if (error.url.indexOf("authenticate") >0 && error.method === "post"){
       if (error.status == "401"){      
         resp.i18nMsg = i18n.global.t("API_ERRORS_INVALID_USER_PASS")
       }else{

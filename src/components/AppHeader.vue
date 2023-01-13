@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       flag : "",
-      showAboutPage : this.$EnvConfig.showAboutPage
+      showAboutPage : this.$AppConfig.showAboutPage
     }    
   },  
   computed: {
@@ -84,7 +84,7 @@ export default {
   },
   methods: {
     ...mapActions({      
-      setLoading: "isLoading"
+      setLoading: "loading"
     }),    
     async logout() {
       await this.$store.dispatch("moduleUsers/logout")      

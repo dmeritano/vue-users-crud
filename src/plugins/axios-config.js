@@ -5,9 +5,9 @@ import { store } from '../store'
 let dmsClient = null
 let otherServiceApiClient = null
 
-export function createDmsClientInstance(baseURL) {
+export function createDmsClientInstance(apiUrl) {
   dmsClient = axios.create({
-    baseURL,
+    baseURL : apiUrl,
     headers: {
       "Content-Type": "application/json",
     },
@@ -25,7 +25,9 @@ export function createDmsClientInstance(baseURL) {
       return response
     },
     function (error) {
+      
       const hasResponse = "response" in error
+
       const data = {
         status: hasResponse ? error.response.status : "",
         message: error.message,
@@ -44,7 +46,9 @@ export function createDmsClientInstance(baseURL) {
             router.push("/login")
           }
           clear()            
-        }       
+        }else{
+          return Promise.reject(data)
+        }      
       }else{
         return Promise.reject(data)
       }     
