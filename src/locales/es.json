@@ -48,5 +48,6 @@
   "API_ERRORS_COULD_NOT_GET_USERS" : "No se pudo obtener la lista de usuarios",
   "APP_NETWORK_ERROR" : "Error de conectividad - No hay conexión",
   "APP_BADREQUEST_ERROR" : "Error en la petición al servidor",
-  "APP_UNKNOWN_ERROR" : "Error desconocido"
+  "APP_UNKNOWN_ERROR" : "Error desconocido",
+  "APP_USERPERMISIONS_ERROR" : "Usted no tiene acceso a la administración de usuarios"
 }

@@ -2,6 +2,7 @@
 import apiDms from "@/services/service-apidms"
 import { getErrorResponse } from '../../helpers'
 import { appConfig } from '@/main'
+import i18n from '@/i18n.js'
 
 export const login = async (context, payload) => {
     context.commit("loading", {status:true}, { root: true })
@@ -71,19 +72,30 @@ export const dmsInfo = async (context) => {
 }
 
 export const getUsers = async (context) => {
-    context.commit("loading", {status:true}, { root: true })
-    context.commit("error", {error : getErrorResponse(null) })
-    await apiDms
-      .getUsers()
-      .then((res) => {
-        context.commit("users", res.data.users)
-      })
-      .catch( (error) => {
-        context.commit("error", {error : getErrorResponse(error) })                    
-      })
-      .finally( ()=> {
-        context.commit("loading", {status:false}, { root: true })    
-      })    
+
+    if (getUsersAllowed(context.rootGetters["user"], context.rootGetters["userProfile"])){
+      context.commit("loading", {status:true}, { root: true })
+      context.commit("error", {error : getErrorResponse(null) })
+      await apiDms
+        .getUsers()
+        .then((res) => {
+          context.commit("users", res.data.users)
+        })
+        .catch( (error) => {
+          context.commit("error", {error : getErrorResponse(error) })                    
+        })
+        .finally( ()=> {
+          context.commit("loading", {status:false}, { root: true })    
+        })  
+    }else{
+      let error = getErrorResponse(null)
+      error.hasError = true
+      error.message = "Sin acceso a lista de usuarios"
+      error.i18nMsg = i18n.global.t("APP_USERPERMISIONS_ERROR")
+      context.commit("error", {error:error})
+    }
+
+  
 }
 
 export const addUser = async (context, payload) => {
@@ -147,4 +159,29 @@ function getProfileObjectWithConfiguredKeys(allFieldsObj, fieldsToInclude){
       }
     }
     return response
+}
+
+function getUsersAllowed(username, userProfileDocument){
+    
+  let response = false  
+  const exist = appConfig.allowedUsers.some(user => {
+    return user.toLowerCase() === username.toLowerCase()
+  })
+  if (exist){
+    return true
+  }else if (Object.keys(userProfileDocument).length == 0){
+    console.warn("Usuario no configurado para gestionar usuarios del sistema");
+    return false
+  }else if (Object.keys(userProfileDocument).length > 0){
+    if (appConfig.allowUsersCrudAttribute in userProfileDocument){
+      if (userProfileDocument[appConfig.allowUsersCrudAttribute].toLowerCase === "true"){
+        return true
+      }
+    }else{
+      console.warn("El perfil de usuario no tiene configurado atributo para especificar permisos [allowUsersCrudAttribute]")
+      return false
+    }
+  }
+  console.warn("Usuario sin permisos para gestionar lista de usuarios");
+  return response
 }

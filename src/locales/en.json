@@ -48,5 +48,6 @@
   "API_ERRORS_COULD_NOT_GET_USERS" : "Could not get user list",
   "APP_NETWORK_ERROR" : "Connectivity error - No connection",
   "APP_BADREQUEST_ERROR" : "Bad request error",
-  "APP_UNKNOWN_ERROR" : "Unknown error"
+  "APP_UNKNOWN_ERROR" : "Unknown error",
+  "APP_USERPERMISIONS_ERROR" : "You do not have access to user administration"
 }

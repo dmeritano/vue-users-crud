@@ -30,7 +30,11 @@
             <td>
               <button class="btn btn-sm btn-default buttons-fixed-width" @click="editUser(index)">{{$t("HOME_TABLE_EDIT_BTN")}}</button>
               &nbsp;
-              <button class="btn btn-sm btn-secondary buttons-fixed-width" @click="deleteUserIntent(index)">{{$t("HOME_TABLE_DELETE_BTN")}}</button>
+              <button class="btn btn-sm btn-secondary buttons-fixed-width" 
+                :disabled="allowDelete(entry.user)"
+                @click="deleteUserIntent(index)">
+                {{$t("HOME_TABLE_DELETE_BTN")}}
+              </button>
             </td>
           </tr>          
         </tbody>
@@ -124,6 +128,9 @@ export default {
         this.showAlertDialog = true
       }            
     },
+    allowDelete(user){
+      return (this.userName.toLowerCase() === user.toLowerCase()) ? true : false
+    },    
     hideEditModal(){
       this.showModal = false
       this.$refs.searchBox.focus()
@@ -131,17 +138,15 @@ export default {
   },
   created() {
     //Esto tambien podria hacer luego del login exitoso y no aqui
-    if (authorizedUser(this.userName,this.allowedUsers)){
-      const loadUsers = async () => {
-        await this.getUsers()
-        if (this.error.hasError){
-          this.dialogAlertMessageType = alertModalErrorTypes.ERROR
-          this.alertDialogText = this.error.i18nMsg
-          this.showAlertDialog = true
-        }        
-      }
-      loadUsers()
+    const loadUsers = async () => {
+      await this.getUsers()
+      if (this.error.hasError){
+        this.dialogAlertMessageType = alertModalErrorTypes.ERROR
+        this.alertDialogText = this.error.i18nMsg
+        this.showAlertDialog = true
+      }        
     }
+    loadUsers()
   }
 }
 
@@ -150,12 +155,6 @@ function findUserOrNameOrSurname(current, searchTerm){
     current.name.toLowerCase().includes(searchTerm) ||
     current.surname.toLowerCase().includes(searchTerm)
   )
-}
-function authorizedUser(username, allowedUsers){
-  const isContained = allowedUsers.some(element => {
-    return element.toLowerCase() === username.toLowerCase();
-  });
-  return isContained
 }
 </script>
 
