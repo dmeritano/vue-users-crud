@@ -25,9 +25,7 @@ export function createDmsClientInstance(apiUrl) {
       return response
     },
     function (error) {
-      
       const hasResponse = "response" in error
-
       const data = {
         status: hasResponse ? error.response.status : "",
         message: error.message,
@@ -37,7 +35,7 @@ export function createDmsClientInstance(apiUrl) {
         responseData: hasResponse ? error.response.data : ""
       }
 
-      //Controlling "Atril session not present" por desconexion
+      //Controlling "Atril session not present" due timeout or desconection
       if (data.status == "401"){
         if (data.responseData.status == "0001"){
           console.warn("Atril session not present. Disconnecting");       
@@ -56,7 +54,7 @@ export function createDmsClientInstance(apiUrl) {
   )
 }
 
-//To consume other API, for example
+//Sample: To consume another API in the same application
 export function createOtherServiceClientInstance(baseURL) {
   otherServiceApiClient = axios.create({
     baseURL,

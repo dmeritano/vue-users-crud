@@ -102,7 +102,7 @@ export default {
       deleteUser : "moduleUsers/deleteUser"      
     }),
     editUser(index){
-      //this.user = this.users[index] - NOOO - no queremos que queden bindeados
+      //this.user = this.users[index] - NO queremos que queden bindeados
       this.user = createUser(this.users[index])      
       this.isNewUser = false
       this.showModal = true
@@ -121,7 +121,6 @@ export default {
       this.showConfirmDialog = false
       await this.deleteUser(this.user.user)
       
-      //preguntar si hubo error y mostrarlo en el siguiente dialog
       if (this.error.hasError){
         this.dialogAlertMessageType = alertModalErrorTypes.ERROR
         this.alertDialogText = this.error.i18nMsg
@@ -137,7 +136,6 @@ export default {
     }
   },
   created() {
-    //Esto tambien podria hacer luego del login exitoso y no aqui
     const loadUsers = async () => {
       await this.getUsers()
       if (this.error.hasError){

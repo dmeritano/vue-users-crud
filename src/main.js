@@ -31,8 +31,7 @@ router.beforeEach( (to, from, next) => {
     }
 })
 
-//Exportamos la configuracion cargada para usar fuera de los componentes 
-//  (en vuex store, por ejemplo)
+//Export the loaded configuration to use outside the components (in vuex store for example)
 export var appConfig = {}
 
 //Loading configuration
@@ -47,7 +46,7 @@ const promiseConfig = loadAppConfig()
         throw new Error("Error loading app config", error)
     })
 
-//Create application
+//Create application after load configuration
 promiseConfig.then( config => {    
     const app = createApp(App)
     app.config.globalProperties.$AppConfig = config
@@ -58,20 +57,3 @@ promiseConfig.then( config => {
     app.mount('#app')      
 })
 
-
-
-
-/*
-getEnvConfig()
-.then( response => {    
-    //loadedConfig = response             
-    const app = createApp(App)
-    app.config.globalProperties.$AppConfig = response
-    createDmsClientInstance(response.serviceBaseUrl)
-    app.use(router)
-    app.use(store)
-    app.use(i18n)
-    app.mount('#app')            
-})
-.catch( (error) => console.error("ERROR: configuration file not loaded", error))
-*/

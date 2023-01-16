@@ -32,7 +32,7 @@ const emptyErrorResponse = {
     errorAtrilSessionNotPresent : false    
 }
 
-export function initialStateUsersState () {
+export function initialStateUsersStore () {
   return {
     dmsInfo:{},
     users:[],

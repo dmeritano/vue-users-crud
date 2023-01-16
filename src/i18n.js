@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 
 /**
- * IMPORTANTE - Se cargan por el loader en la compilacion
+ * IMPORTANTE - Se cargan por el loader, en la compilacion
  * Load locale messages
  * 
  * The loaded `JSON` locale messages is pre-compiled by `@intlify/vue-i18n-loader`, which is integrated into `vue-cli-plugin-i18n`.

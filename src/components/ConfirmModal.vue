@@ -1,5 +1,5 @@
 <template>
-  <!-- Modal -->
+  <!-- Confirm Modal -->
   <div
     class="modal fade show d-block"
     id="staticBackdrop"

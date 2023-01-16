@@ -1,5 +1,5 @@
 <template>
-  <!-- Modal -->
+  <!-- Add/Edit User Modal -->
   <div
     class="modal fade show d-block"
     id="staticBackdrop"

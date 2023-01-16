@@ -1,6 +1,6 @@
 /* Users store mutations */
 
-import { initialStateUsersState } from '../../helpers'
+import { initialStateUsersStore } from '../../helpers'
 
 export const error = (state, payload) => {
     state.error = payload.error
@@ -41,7 +41,7 @@ export const deleteUser = (state, username) => {
 }
 
 export const resetState = (state) => {
-    const s = initialStateUsersState()
+    const s = initialStateUsersStore()
     Object.keys(s).forEach(key => {
         state[key] = s[key]
     })      

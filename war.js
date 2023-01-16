@@ -1,10 +1,11 @@
 /*  ********************************************************************************* 
 *************************************************************************************
-   Script para generar un WAR a partir de la carpeta ./dist, a la cual
-   se le adicionan las carpeta WEB-INF y META-INF
+  
+Script to generate a WAR from the ./dist folder, to which the WEB-INF and 
+    META-INF folders are previously added.
 
-   El script se puede ejecutar con node " node war.js ", aunque tambien se ha agregado en 
-   package.json , al proceso de build:
+The script can be executed with node " node war.js ", although it has also 
+been added in package.json , to the build process:
 
    "build": "vue-cli-service build && node war.js",
 *************************************************************************************   

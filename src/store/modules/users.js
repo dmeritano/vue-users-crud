@@ -1,11 +1,11 @@
 import * as getters from './users-getters'
 import * as mutations from './users-mutations'
 import * as actions from './users-actions'
-import { initialStateUsersState } from '../../helpers'
+import { initialStateUsersStore } from '../../helpers'
 
 const moduleUsers = {
   namespaced: true,
-  state: initialStateUsersState(),
+  state: initialStateUsersStore(),
   getters,
   mutations,
   actions
