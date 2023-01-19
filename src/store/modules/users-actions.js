@@ -72,6 +72,17 @@ export const dmsInfo = async (context) => {
 }
 
 export const getUsers = async (context) => {
+    
+    let error = getErrorResponse(null)
+    const info = context.getters["dmsInfo"];
+    
+    if (info.platform !== "Atril6"){
+      error.hasError = true
+      error.message = "La aplicacion funciona con repositorios versión 6 o superior. Repo configurado: " + info.platform
+      error.i18nMsg = i18n.global.t("APP_INVALID_DMS_VERSION", {version:info.platform})
+      context.commit("error", {error:error})
+      return
+    }
 
     if (getUsersAllowed(context.rootGetters["user"], context.rootGetters["userProfile"])){
       context.commit("loading", {status:true}, { root: true })

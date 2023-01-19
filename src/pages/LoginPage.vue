@@ -76,6 +76,7 @@ export default {
   methods: {
     ...mapActions({
       login: "moduleUsers/login",
+      dmsInfo: "moduleUsers/dmsInfo",
       clearError : "moduleUsers/clearError" 
     }),
     idioma(idioma) {
@@ -91,6 +92,7 @@ export default {
         pass: this.pass,
       }
       await this.login(payload)
+      await this.dmsInfo()
       this.$router.push("/")
     },
   },

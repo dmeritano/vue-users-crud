@@ -49,5 +49,6 @@
   "APP_NETWORK_ERROR" : "Connectivity error - No connection",
   "APP_BADREQUEST_ERROR" : "Bad request error",
   "APP_UNKNOWN_ERROR" : "Unknown error",
-  "APP_USERPERMISIONS_ERROR" : "You do not have access to user administration"
+  "APP_USERPERMISIONS_ERROR" : "You do not have access to user administration",
+  "APP_INVALID_DMS_VERSION" : "Application only works with DMS repositories version 6 or higher (configured: {version})"
 }

@@ -49,5 +49,6 @@
   "APP_NETWORK_ERROR" : "Error de conectividad - No hay conexión",
   "APP_BADREQUEST_ERROR" : "Error en la petición al servidor",
   "APP_UNKNOWN_ERROR" : "Error desconocido",
-  "APP_USERPERMISIONS_ERROR" : "Usted no tiene acceso a la administración de usuarios"
+  "APP_USERPERMISIONS_ERROR" : "Usted no tiene acceso a la administración de usuarios",
+  "APP_INVALID_DMS_VERSION" : "La aplicacion solo funciona con repositorios versión 6 o superior (configurado: {version})"
 }

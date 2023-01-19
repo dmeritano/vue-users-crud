@@ -27,7 +27,7 @@ export function createDmsClientInstance(apiUrl) {
     function (error) {
       const hasResponse = "response" in error
       const data = {
-        status: hasResponse ? error.response.status : "",
+        status: hasResponse ? error.response.status : error.status,
         message: error.message,
         code: error.code,
         url: error.config.baseURL + error.config.url,

@@ -7,7 +7,7 @@ export const error = (state, payload) => {
 }
 
 export const dmsInfo = (state, payload) => {
-        state.dmsInfo = payload.meta.platform + " (" + payload.meta.name + ")"
+        state.dmsInfo = payload.meta//.platform + " (" + payload.meta.name + ")"
 }
 
 export const users = (state, payload) => {      

@@ -27,8 +27,8 @@ export function createUser(payload){
 
 const emptyErrorResponse = {    
     hasError : false,
-    message: i18n.global.t("APP_UNKNOWN_ERROR"),
-    i18nMsg: "",
+    message: "",
+    i18nMsg: i18n.global.t("APP_UNKNOWN_ERROR"),
     errorAtrilSessionNotPresent : false    
 }
 
@@ -45,6 +45,8 @@ export function getErrorResponse(error){
     const resp = {...emptyErrorResponse}
     if (error == null) //Sin error
         return resp;
+
+    console.error(error);
 
     resp.hasError = true
     resp.message = error.message

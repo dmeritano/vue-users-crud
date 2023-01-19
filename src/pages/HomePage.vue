@@ -4,7 +4,7 @@
     <h3 class="my-4">{{ $t("HOME_MAIN_TITLE") }}</h3>
     <div class="row justify-space-between">
       <div class="col mb-3">
-        <button class="btn btn-sm btn-default" @click="addUser()">{{$t("HOME_CREATE_USER_BTN")}}</button>
+        <button v-if="addUserBtnEnabled" class="btn btn-sm btn-default" @click="addUser()">{{$t("HOME_CREATE_USER_BTN")}}</button>
       </div>
       <div class="col mb-3 pe-3">
         <div class="d-flex flex-row-reverse">
@@ -71,7 +71,8 @@ export default {
       alertDialogText : "",
       user : emptyUser(),
       isNewUser : false,
-      searchTerm : ""
+      searchTerm : "",
+      addUserBtnEnabled : true
     }
   },
   computed: {
@@ -139,6 +140,7 @@ export default {
     const loadUsers = async () => {
       await this.getUsers()
       if (this.error.hasError){
+        this.addUserBtnEnabled = false
         this.dialogAlertMessageType = alertModalErrorTypes.ERROR
         this.alertDialogText = this.error.i18nMsg
         this.showAlertDialog = true
