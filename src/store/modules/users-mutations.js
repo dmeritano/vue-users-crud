@@ -35,8 +35,8 @@ export const deleteUser = (state, username) => {
         return item.user == username;
     })
     if (found){
-        var index = state.users.indexOf({user:username})        
-          state.users.splice(index,1)
+        var index = state.users.map( (elem) => {return elem.user }).indexOf(username)
+        state.users.splice(index,1)
     }
 }
 

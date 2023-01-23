@@ -1,7 +1,7 @@
 {
     "showAppFooter" : true,
-    "serviceBaseUrl2" : "http://localhost/DmsRestServiceDTOP411",
-    "serviceBaseUrl" : "http://localhost/DmsRestServiceDPConsulta",
+    "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411",
+    "serviceBaseUrl2" : "http://localhost/DmsRestServiceDPConsulta",
     "showAboutPage" : true,
     "allowedUsers" : ["admin", "testuser","CONFIGURACION_ATRIL"],
     "getUserProfileDocument" : false,
