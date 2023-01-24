@@ -4,9 +4,32 @@
     "serviceBaseUrl2" : "http://localhost/DmsRestServiceDPConsulta",
     "showAboutPage" : true,
     "allowedUsers" : ["admin", "testuser","CONFIGURACION_ATRIL"],
-    "getUserProfileDocument" : false,
+    "getUserProfileDocument" : true,
     "userProfileDocument" : "UserProfile",
     "userProfileLinkedField" : "user_name",
     "userProfileDocumentSelectedFields" : ["user_name", "allow_users_crud"],
-    "allowUsersCrudAttribute" : "allow_users_crud"
+    "allowUsersCrudAttribute" : "allow_users_crud",
+    "createOrEditUserProfileDocument" : true,
+    "userProfileDocumentsParentIdContainer" : "99269579112449",
+    "userProfileFields" : [
+        {
+            "name" : "user_name",
+            "completion" : "auto",
+            "defaultValue" : "",
+            "completionAutoFunction" : "fn_user"
+        },
+        {
+            "name" : "allow_users_crud",
+            "completion" : "default",
+            "defaultValue" : "false",
+            "completionAutoFunction" : ""    
+        },
+        {
+            "name" : "last_password_update",
+            "completion" : "auto",
+            "defaultValue" : "",
+            "completionAutoFunction" : "fn_last_password_update"    
+        }        
+
+    ]       
 }

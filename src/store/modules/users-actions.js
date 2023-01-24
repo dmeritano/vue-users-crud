@@ -3,47 +3,61 @@ import apiDms from "@/services/service-apidms"
 import { getErrorResponse } from '../../helpers'
 import { appConfig } from '@/main'
 import i18n from '@/i18n.js'
+import { getProfileFieldValue } from '../../helpers/fields-completion-plugins'
 
 export const login = async (context, payload) => {
+
     context.commit("loading", {status:true}, { root: true })
     context.commit("error", {error : getErrorResponse(null) })      
-    await apiDms
-      .login(payload)
-      .then( response => {          
-        if (appConfig.getUserProfileDocument){
-          const headers = {
-            "query": appConfig.userProfileDocument + "$" + appConfig.userProfileLinkedField + "='" + response.data.user + "'",
-            "deleted": "false"
-          }            
-          const searchProfile = async () => {
-            await apiDms.search(headers).then( response => {                
-              if (response.data.meta.total == "1"){
-                const id = response.data.docs[0]["#Id"];
-                const getUserDocument = async () => {
-                  await apiDms.getDocumentById(id)
-                    .then( response => {
-                      const profile = getProfileObjectWithConfiguredKeys(response.data.attributes
-                        ,appConfig.userProfileDocumentSelectedFields)
-                      context.commit("userProfile", {profile}, { root: true })               
-                    })
-                }
-                getUserDocument()                  
-              }else{
-                throw new Error("no hay un perfil para el usuario")
-              }                
-            })
-          }                        
-          searchProfile()            
-        }          
+
+    const searchProfile = async (username) => {
+      const headers = {
+        "query": appConfig.userProfileDocument + "$" + appConfig.userProfileLinkedField + "='" + username + "'",
+        "deleted": "false"
+      }      
+      return await apiDms.search(headers)
+    }    
+
+    const getUserDocument = async (id) => {
+      return await apiDms.getDocumentById(id)
+    }
+
+    const makeLogin = async (payload) => {
+      return await apiDms.login(payload)
+    }
+
+    await makeLogin(payload)
+      .then(()=>{
         context.commit("authenticatedStatus", {status:true}, { root: true })          
-        context.commit("loggedUser", {userData: payload}, { root: true })
+        context.commit("loggedUser", {userData: payload}, { root: true })        
+        console.info("Loggin succesfully")
+        if (appConfig.getUserProfileDocument){
+          return searchProfile(payload.user)
+        }
+      })
+      .then((resp) =>{
+        if (appConfig.getUserProfileDocument){
+          if (resp.data.meta.total == "1"){
+            return getUserDocument(resp.data.docs[0]["#Id"])
+          }else{
+            console.error("User had not a associated profile document");
+          }          
+        }
+      })
+      .then((resp)=>{
+        if (appConfig.getUserProfileDocument){
+          const profile = getProfileObjectWithConfiguredKeys(resp.data.attributes
+            ,appConfig.userProfileDocumentSelectedFields)
+          context.commit("userProfile", {profile}, { root: true })
+          console.info("User profile document loaded")          
+        }
       })
       .catch((error) => { 
         context.commit("error", {error : getErrorResponse(error) })
       })
       .finally( () => {
         context.commit("loading", {status:false}, { root: true })
-      })        
+      })     
   }
 
 
@@ -112,17 +126,36 @@ export const getUsers = async (context) => {
 export const addUser = async (context, payload) => {
     context.commit("loading", {status:true}, { root: true })
     context.commit("error", {error : getErrorResponse(null) })
-    await apiDms
-      .addUser(payload)
+
+    const addProfileDocumentTask = async (profileDoc) => {
+      return await apiDms.addDocument(appConfig.userProfileDocumentsParentIdContainer,profileDoc)
+    }    
+    const addUser = async (payload) => {
+      return await apiDms.addUser(payload)
+    }
+
+    await addUser(payload)
       .then( (res) => {
+        console.info("User created");
         context.commit("addUser", res.data)
       })
-      .catch( (error) => {
+      .then(()=> {
+        if (appConfig.createOrEditUserProfileDocument){
+          const profileDoc = composeProfileDocument(payload.user)
+          return addProfileDocumentTask(profileDoc)
+        }
+      })
+      .then(()=>{
+        if (appConfig.createOrEditUserProfileDocument){
+          console.info("User profile created");      
+        }
+      })
+      .catch((error)=>{
         context.commit("error", {error : getErrorResponse(error) })                    
       })
       .finally( ()=> {
         context.commit("loading", {status:false}, { root: true })    
-      })           
+      })        
 }
 
 export const updateUser = async (context, payload) => {
@@ -142,19 +175,51 @@ export const updateUser = async (context, payload) => {
 }
 
 export const deleteUser = async (context, username) => {
-    context.commit("loading", {status:true}, { root: true })   
-    context.commit("error", {error : getErrorResponse(null) }) 
-    await apiDms
-      .deleteUser(username)
-      .then( () => {
-        context.commit("deleteUser", username)          
-      })
-      .catch((error) => {
-        context.commit("error", {error : getErrorResponse(error) })
-      })
-      .finally( ()=> {
-        context.commit("loading", {status:false}, { root: true })    
-      })         
+
+  context.commit("loading", {status:true}, { root: true })   
+  context.commit("error", {error : getErrorResponse(null) }) 
+  
+  const searchProfile = async (username) => {
+    const headers = {
+      "query": appConfig.userProfileDocument + "$" + appConfig.userProfileLinkedField + "='" + username + "'",
+      "deleted": "false"
+    }      
+    return await apiDms.search(headers)
+  }  
+  const deleteProfileDocumentTask = async (id) => {
+    return await apiDms.deleteDocumentById(id)
+  } 
+  const deleteUser = async (username) => {
+    return await apiDms.deleteUser(username)
+  }
+
+  await deleteUser(username)
+    .then(() => {
+      console.info("User deleted", username);
+      context.commit("deleteUser", username) 
+    })
+    .then(() => {
+      if (appConfig.createOrEditUserProfileDocument){
+        return searchProfile(username)
+      }
+    })
+    .then((resp) => {
+      if (appConfig.createOrEditUserProfileDocument){
+        const id = resp.data.docs[0]["#Id"]
+        return deleteProfileDocumentTask(id) 
+      }
+    })
+    .then(()=>{
+      if (appConfig.createOrEditUserProfileDocument){
+        console.info("User profile document deleted");      
+      }      
+    })
+    .catch((error) => {
+      context.commit("error", {error : getErrorResponse(error) })
+    })
+    .finally(()=> {
+      context.commit("loading", {status:false}, { root: true })    
+    })   
 }
 
 export const clearError = (context) => {
@@ -196,3 +261,50 @@ function getUsersAllowed(username, userProfileDocument){
   console.warn("Usuario sin permisos para gestionar lista de usuarios");
   return response
 }
+
+function composeProfileDocument(user){
+
+  const pluginData = {
+    "user" : user
+  }
+  let document = {
+    "meta" : {
+      "item" : "false",
+      "type" : appConfig.userProfileDocument
+    },
+    "attributes" : {}
+  }
+  for (let i = 0; i < appConfig.userProfileFields.length; i++){    
+    const elem = appConfig.userProfileFields[i]
+    let value = ""
+    if (elem.completion.toLowerCase() === "default"){
+      value = elem.defaultValue
+    }else if (elem.completion.toLowerCase() === "auto"){
+      //plugin
+      value = getProfileFieldValue(elem.completionAutoFunction, pluginData)
+    }else{
+      console.log("Metodo de completado de campos de perfil no implementado");
+    }    
+    document.attributes[elem.name] = value
+  }
+  return document
+}
+
+
+      /* codigo original ---- addUser
+
+        context.commit("loading", {status:true}, { root: true })
+        context.commit("error", {error : getErrorResponse(null) })
+        await apiDms
+          .addUser(payload)
+          .then( (res) => {
+            context.commit("addUser", res.data)
+          })
+          .catch( (error) => {
+            context.commit("error", {error : getErrorResponse(error) })                    
+          })
+          .finally( ()=> {
+            context.commit("loading", {status:false}, { root: true })    
+          })  
+
+      */

@@ -43,8 +43,9 @@ export function initialStateUsersStore () {
 export function getErrorResponse(error){
 
     const resp = {...emptyErrorResponse}
-    if (error == null) //Sin error
-        return resp;
+    if (error === null){
+      return resp;  //No error
+    }
 
     console.error(error);
 
@@ -69,8 +70,12 @@ export function getErrorResponse(error){
       if (error.responseData != ""){
         if (error.responseData.status == "0016"){
           resp.i18nMsg = i18n.global.t("API_ERRORS_USER_EXIST")
+
         }else if (error.responseData.status == "0023"){
-          resp.i18nMsg = i18n.global.t("API_ERRORS_USER_COULD_NOT_UPDATE_PASSWORD")
+          resp.i18nMsg = i18n.global.t("API_ERRORS_USER_COULD_NOT_UPDATE_PASSWORD")        
+
+        }else if (error.responseData.status == "0008"){
+          resp.i18nMsg = i18n.global.t("APP_BADREQUEST_ERROR")
         }else{
           //Tratar otros codigo de error del api. Por ahora queda lo que viene en response.data
           resp.i18nMsg = error.responseData.message //Sin traduccion
