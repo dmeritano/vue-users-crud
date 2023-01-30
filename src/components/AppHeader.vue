@@ -25,6 +25,8 @@
           </li>          
         </ul>
         <ul class="navbar-nav me-5">
+   
+
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -40,6 +42,10 @@
               <li><a class="dropdown-item" href="#" @click="idioma('es')">{{$t("HEADER_LOCALE_LONG_NAME_ES")}}</a></li>
               <li><a class="dropdown-item" href="#" @click="idioma('en')">{{$t("HEADER_LOCALE_LONG_NAME_EN")}}</a></li>
             </ul>
+          </li>
+
+          <li class="nav-item username" v-if="authenticated">
+            <router-link to="/credentials" class="nav-link">{{user}}</router-link>
           </li>
 
           <li class="nav-item" v-if="!authenticated">
@@ -78,8 +84,13 @@ export default {
     authenticated() {
       return this.$store.getters.authenticated
     },
-    showAbout(){
-      return this.$Env
+    user(){
+      let username = this.$store.getters.user
+      if (username.length > 10){
+        username = username.substring(0,10)
+      }
+      username = username + "..."
+      return username
     }
   },
   methods: {
