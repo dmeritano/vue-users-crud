@@ -9,6 +9,7 @@ function initialState () {
       userProfile : {},
       loading:false,
       version: require('../../package.json').version,    
+      userMustChangePassword:false
     }
   }
 
@@ -29,6 +30,9 @@ export const store = createStore({
         },
         userProfile(state){
             return state.userProfile
+        },
+        userMustChangePassword(state){
+            return state.userMustChangePassword
         }
     },
     mutations:{
@@ -43,6 +47,9 @@ export const store = createStore({
         },
         loading(state, payload){
             state.loading = payload.status
+        },
+        userMustChangePassword:(state,payload) => {
+            state.userMustChangePassword = payload.status
         },
         resetState(state){
             const s = initialState()

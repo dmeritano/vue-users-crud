@@ -21,12 +21,20 @@ router.beforeEach( (to, from, next) => {
         if(!store.getters.authenticated){
             next('/login')
         }else{
-            next()
+            if(to.fullPath.toLocaleLowerCase() === "/home"){
+                if (store.getters.userMustChangePassword){
+                    next('/credentials')
+                }else{
+                    next()
+                }            
+            }else{
+                next()
+            }
         }
     }else if (to.fullPath.toLocaleLowerCase() === "/login" &&
             store.getters.authenticated){
-        next('/home')
-    }else{
+        next('/home')    
+    }else{        
         next()
     }
 })

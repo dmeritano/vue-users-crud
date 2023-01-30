@@ -3,15 +3,15 @@
     "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411",
     "serviceBaseUrl2" : "http://localhost/DmsRestServiceDPConsulta",
     "showAboutPage" : true,
-    "allowedUsers" : ["admin", "testuser","CONFIGURACION_ATRIL"],
+    "allowedUsers" : ["admin", "testuser", "david"],
     "getUserProfileDocument" : true,
     "userProfileDocument" : "UserProfile",
-    "userProfileLinkedField" : "user_name",
-    "userProfileDocumentSelectedFields" : ["user_name", "allow_users_crud"],
+    "userProfileLinkedAttribute" : "user_name",
+    "userProfileDocumentSelectedAttributes" : ["user_name", "allow_users_crud","last_password_update"],
     "allowUsersCrudAttribute" : "allow_users_crud",
     "createOrEditUserProfileDocument" : true,
     "userProfileDocumentsParentIdContainer" : "99269579112449",
-    "userProfileFields" : [
+    "userProfileAttributes" : [
         {
             "name" : "user_name",
             "completion" : "auto",
@@ -30,6 +30,9 @@
             "defaultValue" : "",
             "completionAutoFunction" : "fn_last_password_update"    
         }        
-
-    ]       
+    ],
+    "controlPasswordExpiration" : true,
+    "passwordExpirationDateAttribute" : "last_password_update",
+    "expirationAttributeSetValueFunction" : "fn_last_password_update",
+    "maximumPasswordAge": 30
 }

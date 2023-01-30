@@ -146,7 +146,7 @@ export default {
       this.isNewUser ? 
         await this.saveUser(this.currentUser) :
         await this.updateUser(this.currentUser)
-        
+
       if (this.getApiError.hasError){
         this.errors.push(this.getApiError.i18nMsg)
       }else{

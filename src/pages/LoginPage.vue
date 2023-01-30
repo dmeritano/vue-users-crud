@@ -18,7 +18,7 @@
               class="form-control custom-input"
               id="user"
               v-model="user"
-              placeholder="Usuario"
+              :placeholder="$t('LOGIN_INPUT_USERNAME')"
             />
           </div>
         </div>
@@ -29,7 +29,7 @@
               class="form-control custom-input"
               id="pass"
               v-model="pass"
-              placeholder="Contraseña"
+              :placeholder="$t('LOGIN_INPUT_PASSWORD')"
             />
           </div>
         </div>
@@ -91,8 +91,10 @@ export default {
         user: this.user,
         pass: this.pass,
       }
-      await this.login(payload)
-      await this.dmsInfo()
+      const success = await this.login(payload)
+      if (success){
+        await this.dmsInfo()
+      }                  
       this.$router.push("/")
     },
   },

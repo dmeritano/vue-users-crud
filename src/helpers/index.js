@@ -21,7 +21,7 @@ export function createUser(payload){
         name:payload.name,
         surname:payload.surname,
         pass:"",
-        group:""    
+        group:"Administrators"    
     }
 }
 
@@ -51,6 +51,7 @@ export function getErrorResponse(error){
 
     resp.hasError = true
     resp.message = error.message
+    resp.i18nMsg = error.message
 
     if (error.code == "ERR_NETWORK"){
       resp.i18nMsg = i18n.global.t("APP_NETWORK_ERROR")
@@ -85,7 +86,10 @@ export function getErrorResponse(error){
     }
     
     if (error.status == "404"){      
-      if (error.responseData != ""){
+
+      resp.i18nMsg = i18n.global.t("API_ERRORS_RESOURCE_NOT_FOUND") 
+
+      if (error.responseData != "" && error.responseData?.status){
         if (error.responseData.status == "0022"){
           resp.i18nMsg = i18n.global.t("API_ERRORS_USER_NOT_EXIST")
         }else if (error.url.indexOf("users") >0 && error.method === "get"){   
@@ -96,6 +100,7 @@ export function getErrorResponse(error){
           resp.i18nMsg = error.responseData.message //Sin traduccion
         }
       }
+      
       return resp    
     }
 

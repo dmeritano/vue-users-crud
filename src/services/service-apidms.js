@@ -49,5 +49,13 @@ export default {
   async deleteDocumentById(id){
     const url = "/dms/documents/" + id
     return await dmsClient.delete(url)
+  },
+  async updateDocument(id, payload){   
+    const url = "/dms/documents/" + id
+    return await dmsClient.put(url, payload)
+  },
+  async updatePassword(payload){
+    const url = "/dms/users"
+    return await dmsClient.put(url, payload)
   }
 }
