@@ -6,7 +6,7 @@ import ChangePassword from '../pages/ChangePassword'
 export const routes = [
     { path: '/login', component: LoginPage},
     { path: '/about', component: AboutPage},
-    { path: '/credentials', component: ChangePassword},
+    { path: '/credentials', component: ChangePassword, meta: { requiresAuth: true }},
     { path: '/home', component: HomePage, meta: { requiresAuth: true } },
     { path: '/:pathMatch(.*)*', redirect:'/home'}
 ]

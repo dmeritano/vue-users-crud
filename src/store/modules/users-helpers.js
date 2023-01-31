@@ -27,7 +27,7 @@ export function getUsersAllowed(username, userProfileDocument){
     return false
   }else if (Object.keys(userProfileDocument).length > 0){
     if (appConfig.allowUsersCrudAttribute in userProfileDocument){
-      if (userProfileDocument[appConfig.allowUsersCrudAttribute].toLowerCase === "true"){
+      if (userProfileDocument[appConfig.allowUsersCrudAttribute].toLowerCase() === "true"){
         return true
       }
     }else{
@@ -39,19 +39,16 @@ export function getUsersAllowed(username, userProfileDocument){
   return response
 }
 
-export function composeProfileDocument(user, isNewDocument){
+export function composeProfileDocument(user){
 
   const pluginData = {
     "user" : user
   }
   let document = {
-    "attributes" : {}
-  }
-
-  if (isNewDocument){
-    document.meta = {
-        "item" : "false",
-        "type" : appConfig.userProfileDocument
+    "attributes" : {},
+    "meta" : {
+      "item" : "false",
+      "type" : appConfig.userProfileDocument
     }
   }
   

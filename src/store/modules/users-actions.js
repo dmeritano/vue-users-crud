@@ -10,7 +10,7 @@ export const login = async (context, payload) => {
 
     try {
       context.commit("loading", {status:true}, { root: true })
-      context.commit("error", {error : getErrorResponse(null) })      
+      context.commit("error", {error : getErrorResponse() })      
       //Authenticate
       await apiDms.login(payload)      
       if (appConfig.getUserProfileDocument){
@@ -65,7 +65,7 @@ export const dmsInfo = async (context) => {
 
 export const getUsers = async (context) => {
     
-    let error = getErrorResponse(null)
+    let error = getErrorResponse()
     const info = context.getters["dmsInfo"];
     
     if (info.platform !== "Atril6"){
@@ -77,7 +77,7 @@ export const getUsers = async (context) => {
 
     if (utils.getUsersAllowed(context.rootGetters["user"], context.rootGetters["userProfile"])){
       context.commit("loading", {status:true}, { root: true })
-      context.commit("error", {error : getErrorResponse(null) })
+      context.commit("error", {error : getErrorResponse() })
       await apiDms
         .getUsers()
         .then((res) => {
@@ -90,7 +90,7 @@ export const getUsers = async (context) => {
           context.commit("loading", {status:false}, { root: true })    
         })  
     }else{
-      let error = getErrorResponse(null)
+      let error = getErrorResponse()
       error.hasError = true
       error.message = "Sin acceso a lista de usuarios"
       error.i18nMsg = i18n.global.t("APP_USERPERMISIONS_ERROR")
@@ -104,7 +104,7 @@ export const addUser = async (context, payload) => {
 
     try {
       context.commit("loading", {status:true}, { root: true })
-      context.commit("error", {error : getErrorResponse(null) })
+      context.commit("error", {error : getErrorResponse() })
 
       //In case there was any profile left without deleting for the user, we proceed to delete them.
       await utils.deleteUserProfileDocuments(payload.user)
@@ -114,7 +114,7 @@ export const addUser = async (context, payload) => {
       console.info("User created");
 
       if (appConfig.createOrEditUserProfileDocument){
-        const profileDoc = utils.composeProfileDocument(payload.user, true)
+        const profileDoc = utils.composeProfileDocument(payload.user)
         await apiDms.addDocument(appConfig.userProfileDocumentsParentIdContainer,profileDoc)
         console.info("User profile document created");  
       }      
@@ -130,9 +130,8 @@ export const updateUser = async (context, payload) => {
     
   try {
     context.commit("loading", {status:true}, { root: true })   
-    context.commit("error", {error : getErrorResponse(null) }) 
+    context.commit("error", {error : getErrorResponse() }) 
     
-
     //Update user perse
     const response = await apiDms.updateUser(payload) 
     console.info("User updated")
@@ -148,8 +147,7 @@ export const updateUser = async (context, payload) => {
           utils.getProfileFieldValue(appConfig.expirationAttributeSetValueFunction)
         await apiDms.updateDocument(foundDocument.data.attributes["#Id"], docPayload)     
         console.log("Update profile document updated");   
-    }      
-    
+    }          
     context.commit("updateUser", response.data) 
   } catch (error) {
     context.commit("error", {error : getErrorResponse(error) })      
@@ -161,7 +159,7 @@ export const updateUser = async (context, payload) => {
 export const deleteUser = async (context, username) => {
 
   context.commit("loading", {status:true}, { root: true })   
-  context.commit("error", {error : getErrorResponse(null) }) 
+  context.commit("error", {error : getErrorResponse() }) 
   
   await apiDms.deleteUser(username)
     .then(() => {
@@ -186,10 +184,10 @@ export const deleteUser = async (context, username) => {
 
 export const updateUserPassword = async (context, payload) => {
 
-  let error = getErrorResponse(null)
+  let error = getErrorResponse()
   try {
     context.commit("loading", {status:true}, { root: true })   
-    context.commit("error", {error : getErrorResponse(null) }) 
+    context.commit("error", {error : getErrorResponse() }) 
 
     if (!utils.passwordChangeValidations(payload)){
       error.hasError = true
@@ -215,5 +213,5 @@ export const updateUserPassword = async (context, payload) => {
 }
 
 export const clearError = (context) => {
-    context.commit("error", {error : getErrorResponse(null) })
+    context.commit("error", {error : getErrorResponse() })
 }

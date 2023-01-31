@@ -79,23 +79,19 @@ export default {
       dmsInfo: "moduleUsers/dmsInfo",
       clearError : "moduleUsers/clearError" 
     }),
-    idioma(idioma) {
-      if (idioma === "en") {
-        this.$i18n.locale = "en"
-      } else {
-        this.$i18n.locale = "es"
-      }
-    },
-    async authenticate() {
+    authenticate() {
       const payload = {
         user: this.user,
         pass: this.pass,
       }
-      const success = await this.login(payload)
-      if (success){
-        await this.dmsInfo()
-      }                  
-      this.$router.push("/")
+      this.login(payload)
+        .then((success) => {
+          if (success){
+            this.dmsInfo().then(()=>{
+              this.$router.push("/")
+            })            
+          }
+        })                      
     },
   },
 }

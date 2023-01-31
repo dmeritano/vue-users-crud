@@ -89,7 +89,7 @@ export default {
       if (username.length > 10){
         username = username.substring(0,10)
       }
-      username = username + "..."
+      username += "..."
       return username
     }
   },

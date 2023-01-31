@@ -31,7 +31,7 @@
             "completionAutoFunction" : "fn_last_password_update"    
         }        
     ],
-    "controlPasswordExpiration" : true,
+    "controlPasswordExpiration" : false,
     "passwordExpirationDateAttribute" : "last_password_update",
     "expirationAttributeSetValueFunction" : "fn_last_password_update",
     "maximumPasswordAge": 30

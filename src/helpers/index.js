@@ -36,14 +36,14 @@ export function initialStateUsersStore () {
   return {
     dmsInfo:{},
     users:[],
-    error: getErrorResponse(null)
+    error: getErrorResponse()
   }
 }
 
 export function getErrorResponse(error){
 
     const resp = {...emptyErrorResponse}
-    if (error === null){
+    if (error === undefined){
       return resp;  //No error
     }
 

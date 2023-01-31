@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5">
-    <div class="login-container">
+    <div class="changepass-container">
       <h4 class="text-center py-4">{{$t("CHANGEPASSWORD_MAIN_TITLE")}}</h4>
       <p class="text-danger" v-if="mustChangePassword">{{$t("CHANGEPASSWORD_WARNING_MUST_CHANGEPASS")}}</p>
       <form class="login-form" @submit.prevent>
@@ -106,10 +106,10 @@ export default {
     }),
     async changePassword() {
       const payload = {
-        user : this.user,
-        currentpass: this.currentpass,
-        newpass : this.newpass,
-        newpassrepeat : this.newpassrepeat  
+        "user" : this.user,
+        "currentpass" : this.currentpass,
+        "newpass" : this.newpass,
+        "newpassrepeat" : this.newpassrepeat  
       }
       await this.updateUserPassword(payload)
       if (!this.error.hasError){
@@ -126,14 +126,9 @@ export default {
 </script>
 
 <style scoped>
-.login-container {
+.changepass-container {
   width: 320px;
   max-width: 100%;
   margin: 80px auto;
-}
-.custom-version{
-  font-size: smaller;
-  font-weight: lighter;
-  color:lightgrey;
 }
 </style>

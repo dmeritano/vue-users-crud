@@ -1,5 +1,7 @@
 import { dmsClient } from "@/plugins/axios-config"
 
+/* The base address (baseURL) for all endpoints was set in @/plugins/axios-config.js, when client was created */
+
 export default {
   name: "apiDms",
   async login(payload) {
