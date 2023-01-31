@@ -44,6 +44,7 @@
   "CHANGEPASSWORD_INPUT_CURRENTPASS" : "Contraseña actual",
   "CHANGEPASSWORD_INPUT_NEWPASS" : "Nueva contraseña",
   "CHANGEPASSWORD_INPUT_NEWPASSREPEAT" : "Repita la nueva contraseña",
+  "CHANGEPASSWORD_WARNING_MUST_CHANGEPASS" : "Contraseña vencida. Debe cambiarla para poder continuar",
   "CONFIRM_DIALOG_TITLE" : "Información",
   "ALERT_DIALOG_TITLE" : "Información",
   "GENERAL_CANCEL_BTN" : "Cancelar",

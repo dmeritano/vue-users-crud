@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="login-container">
       <h4 class="text-center py-4">{{$t("CHANGEPASSWORD_MAIN_TITLE")}}</h4>
-
+      <p class="text-danger" v-if="mustChangePassword">{{$t("CHANGEPASSWORD_WARNING_MUST_CHANGEPASS")}}</p>
       <form class="login-form" @submit.prevent>
         <div class="row mt-2">
           <div class="col-md-12 form-group">
@@ -90,7 +90,10 @@ export default {
   },
   computed:{
     ...mapGetters({error: 'moduleUsers/error'}),
-    ...mapGetters({user: 'user'})
+    ...mapGetters({user: 'user'}),  
+    mustChangePassword() {
+      return this.$store.getters.userMustChangePassword
+    }
   },
   mounted() {
     document.title =  this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_CHANGEPASS")
