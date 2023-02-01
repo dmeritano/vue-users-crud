@@ -17,6 +17,7 @@ import '@/assets/css/global.css';
 
 //Configure router
 router.beforeEach( (to, from, next) => {
+    console.log(to);
     if (to.matched.some(route => route.meta.requiresAuth)){
         if(!store.getters.authenticated){
             next('/login')
@@ -51,6 +52,7 @@ const promiseConfig = loadAppConfig()
         })
     })
     .catch(error => {
+        console.log(error);
         throw new Error("Error loading app config", error)
     })
 

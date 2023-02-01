@@ -12,9 +12,11 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">
-            {{title}}
-          </h1>
+          <div class="d-flex justify-content-between">            
+              <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                {{title}}
+              </h1>              
+          </div>
         </div>
         <div class="modal-body">
           <div v-if="errors.length">
@@ -81,12 +83,19 @@
           </div>           
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary buttons-fixed-width" @click="hideModal()">
-            {{$t("GENERAL_CANCEL_BTN")}}
-          </button>
-          <button type="button" class="btn btn-default buttons-fixed-width" @click="save()">
-            {{$t("GENERAL_SAVE_BTN")}}
-          </button>
+          <div>
+            <div v-if="showEditUserProfile">
+              Perfil
+            </div>          
+          </div>
+          <div>
+            <button type="button" class="btn btn-secondary buttons-fixed-width me-1" @click="hideModal()">
+              {{$t("GENERAL_CANCEL_BTN")}}
+            </button>
+            <button type="button" class="btn btn-default buttons-fixed-width" @click="save()">
+              {{$t("GENERAL_SAVE_BTN")}}
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -112,6 +121,9 @@ export default {
         }else{
             return this.$t("EDITUSER_TITLE_EDIT")
         }
+    },
+    showEditUserProfile(){
+      return this.$AppConfig.createOrEditUserProfileDocument && !this.isNewUser
     },
     isDisabled(){
       return !this.isNewUser 
@@ -162,4 +174,9 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.modal-footer{
+  display: flex;
+  justify-content: space-between;
+}
+</style>

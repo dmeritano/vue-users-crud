@@ -2,4 +2,25 @@ TO-DO
 ==============
 
 
+Para no afectar la rama principal, se crea nueva rama "dev"
+
+PERMITIR VER Y EDITAR EL PERFIL DE UN usuario
+=============================================
+
+Tarea 1
+=======
+En la ventana de edicion de usuario (no la de alta), si está activa la creación/edicion de perfiles de usuario,
+agregar botón que: 
+    - cierre el formulario de edicion
+    - redirija a nueva pagina (UserProfile.vue) en ruta /users/profile/{username}
+
+
+Tarea 2
+=======
+En la nueva pagina habrá que, luego de obtener el profile del usuario, mostrar ahí los campos
+para que puedan ser editados. 
+En tal sentido, deberia poder configurarse qué campos se muestran (los mismos configurados para la creación?)
+En la configuración que se escoja, habría que determinar qué campos se pueden editar (por ejemplo, user_name no se deberia
+permitir modificar, los de autocompletado tampoco...) y para los campos que SI se puedan editar quizás
+se necesario poner validaciones y posibles origen de datos, como puede ser una lista/array.
 
