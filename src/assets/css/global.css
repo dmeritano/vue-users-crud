@@ -61,5 +61,11 @@ body {
 .buttons-fixed-width{
 	width: 80px;
 }
+/* override bootstrap text-default*/
+.text-default{
+	color: #0092A2;	
+}
+
+
 
 

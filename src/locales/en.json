@@ -30,6 +30,7 @@
   "EDITUSER_NAME" : "Name",
   "EDITUSER_SURNAME" : "Surname",
   "EDITUSER_PASSWORD" : "Password",
+  "EDITUSER_PROFILE_LINK" : "User's profile",
   "EDITUSER_VALIDATION_USERNAME" : "Username is required",
   "EDITUSER_VALIDATION_PASSWORD" : "Password is required",
   "EDITUSER_ERRORS_WARNING" : "Please, check following error | Please, check following errors",

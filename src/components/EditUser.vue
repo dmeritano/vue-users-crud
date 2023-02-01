@@ -85,7 +85,10 @@
         <div class="modal-footer">
           <div>
             <div v-if="showEditUserProfile">
-              Perfil
+              <router-link class="nav-link text-default"
+                :to="getUserProfileUrl"
+                >{{$t("EDITUSER_PROFILE_LINK")}}</router-link
+              >
             </div>          
           </div>
           <div>
@@ -131,6 +134,13 @@ export default {
     getErrors(){
       let resp = {...this.errors}
       return resp
+    },
+    getUserProfileUrl(){
+      //Return router-link to, with named route and params      
+      return {
+        "name" : "profile",
+        "params" : { "username" : this.currentUser.user.toLowerCase()}
+      }
     }
   },
   methods: {

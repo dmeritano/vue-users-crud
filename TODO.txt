@@ -11,8 +11,10 @@ Tarea 1
 =======
 En la ventana de edicion de usuario (no la de alta), si está activa la creación/edicion de perfiles de usuario,
 agregar botón que: 
-    - cierre el formulario de edicion
     - redirija a nueva pagina (UserProfile.vue) en ruta /users/profile/{username}
+
+TAREA 1 FINALIZADA
+==================
 
 
 Tarea 2
