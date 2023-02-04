@@ -4,9 +4,13 @@ Se parte de proyecto base vue-base (dmeritano.github.com)
 (*) Solo funciona con repositorios DMS versión 6 o superior.
 
 
-==Notas version 1.0.3==
+==Notas version 1.1.0==
 
 
 ### Mejoras y correciones
 
-Incluido link en barra de navegacion que muestra el nombre del usuario autenticado y al clickearlo se accede a la pagina de cambio de contraseña.
+Con el ultimo commit se agrego funcionalidad completa para editar el perfil del usuario,
+en la nueva page UserProfile.vue
+
+Este commit es solo por la actualizacion del package.json con el nuevo numero de version y
+para inclir el comentario del parrafo anterior.
