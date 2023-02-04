@@ -19,52 +19,63 @@
                 </span>
                 <div v-if="isSelectControl(repoKey)">
                     <select :disabled="isDisabled(repoKey)" 
-                            :name="getSelectName(repoKey)" 
+                            :name="getSelectName(repoKey)"
+                            v-model="attributes[repoKey]"
                             class="form-select" 
                             :id="repoKey">
                         <option v-for="(cfgValue,cfgKey,index) in getSelectItems(repoKey)" 
                             :key="index" 
                             :value="cfgValue.valueAttribute"
                             :selected="cfgValue.valueAttribute === repoValue">
-                            {{$t(cfgValue.i18nTextId, cfgValue.valueAttribute)}}                            
+                            {{getOptioni18nText(cfgValue.i18nTextId,cfgValue.valueAttribute)}}                            
                         </option>
                     </select>
                 </div>
                 <div v-else-if="isSelectControlMultiple(repoKey)">
                     <select :disabled="isDisabled(repoKey)" 
-                            :name="getSelectName(repoKey)" 
+                            :name="getSelectName(repoKey)"
+                            v-model="attributes[repoKey]"
                             class="form-select" 
-                            :id="repoKey" 
+                            :id="repoKey"
                             multiple>
                         <option v-for="(cfgValue,cfgKey,index) in getSelectItems(repoKey)" 
                             :key="index" 
                             :value="cfgValue.valueAttribute"
                             :selected="repoValue.indexOf(cfgValue.valueAttribute) >= 0">
-                            {{$t(cfgValue.i18nTextId, cfgValue.valueAttribute)}}                            
+                            {{getOptioni18nText(cfgValue.i18nTextId,cfgValue.valueAttribute)}}                            
                         </option>
                     </select>                    
                 </div>
                 <div v-else> <!-- input -->
-                    <input class="form-control" type="text" :id="repoKey" :value="repoValue" :disabled="isDisabled(repoKey)" />
+                    <input class="form-control" type="text" :id="repoKey" v-model="attributes[repoKey]" :disabled="isDisabled(repoKey)" />
                 </div>            
             </div>
             <div class="col-12 mt-5">
                 <button type="submit" @click="saveProfile(this)" class="btn btn-default">{{$t("GENERAL_SAVE_BTN")}}</button>
             </div>            
         </form>
-    </div>  
+    </div>
+    <alert-modal v-if="showAlertDialog" :messageType="dialogAlertMessageType" :message="alertDialogText" @closeAlert="showAlertDialog=false"/>
 </template>
 
 <script>
 
 import { mapActions, mapGetters } from "vuex"
+import AlertModal from '../components/AlertModal.vue'
+import { alertModalErrorTypes } from '../helpers'
 
 export default {
+    components: {
+        'alert-modal' : AlertModal
+    },    
     data(){
         return {
-            "userName" : this.$route.params.username,
-            "attributes" : {},
-            "profileDocId" : null
+            userName : this.$route.params.username,
+            attributes : {},
+            profileDocId : null,
+            showAlertDialog : false,
+            dialogAlertMessageType : alertModalErrorTypes.DEFAULT,
+            alertDialogText : "",            
         }
     },
     computed:{
@@ -150,13 +161,17 @@ export default {
                 return {}
             }
         },
-        deselectAllOptions(attribute){
-            let options = document.getElementById(attribute).options
-            for(var i=0; i<options.length; i++) {
-                options[i].selected=false;
-            }            
+        getOptioni18nText(translationId, defaultText){
+            if (translationId && translationId.trim().length > 0){
+                return this.$t(translationId.trim())
+            }else{
+                return defaultText
+            }
         },
-        async saveProfile(){        
+        deselectAllOptions(attribute){
+            this.attributes[attribute] = []         
+        },
+        async saveProfile(){
             const profileAttributes = {}
             const formElements = document.querySelectorAll('#form-profile input,select')
             formElements.forEach(elem => {
@@ -166,20 +181,34 @@ export default {
                         profileAttributes[elem.id] = options.join(',')    
                     }
                     else{
-                        profileAttributes[elem.id] = elem.value
+                        profileAttributes[elem.id] = elem.value.trim()
                     }                    
                 }                 
-            });
+            })
             await this.saveUserProfile({
                 "attributes" : profileAttributes,
                 "id" : this.profileDocId,
                 "user" : this.userName
             })
+            if (!this.error.hasError){
+                this.alertDialogText = this.$t("USERPROFILE_PROFILE_UPDATED")
+                this.showAlertDialog = true                                 
+            }            
         }
     },
     created(){
         this.getUserProfile(this.userName)
             .then((response) => {
+                /* For attributes set to "select-multiple", which in the dms save as a string with 
+                comma separated values, I have to convert (split) the string to an array so that
+                the v-model associated with the SELECT control of type "multiple" works. correctly */
+                for (const [key, value] of Object.entries(response.profileAttributes)) {
+                    const configuredAttrs = this.$AppConfig.userProfileAttributes            
+                    let elem = configuredAttrs.filter(e => {return e.name === key})                    
+                    if (elem && elem[0].htmlControl.toLowerCase() === "select-multiple"){
+                        response.profileAttributes[key] = value.split(",")
+                    }
+                }
                 this.attributes = response.profileAttributes
                 this.profileDocId = response.id
         })        

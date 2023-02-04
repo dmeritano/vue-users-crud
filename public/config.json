@@ -7,7 +7,6 @@
     "getUserProfileDocument" : true,
     "userProfileDocument" : "UserProfile",
     "userProfileLinkedAttribute" : "user_name",
-    "userProfileDocumentSelectedAttributes" : ["user_name", "allow_users_crud","last_password_update"],
     "allowUsersCrudAttribute" : "allow_users_crud",
     "createOrEditUserProfileDocument" : true,
     "userProfileDocumentsParentIdContainer" : "99269579112449",
@@ -48,7 +47,7 @@
             "completion" : "auto",
             "defaultValue" : "",
             "completionAutoFunction" : "fn_last_password_update",
-            "editable" : true,
+            "editable" :false,
             "htmlControl" : "input",
             "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE"
         },
@@ -60,6 +59,28 @@
             "editable" : true,
             "htmlControl" : "select",
             "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_OPEN",
+            "selectConfig" : {
+                "name" : "select-open",
+                "items" : [
+                    {
+                        "valueAttribute" : "false",
+                        "i18nTextId" : "PROFILE_FALSE_VALUE"
+                    },
+                    {
+                        "valueAttribute" : "true",
+                        "i18nTextId" : "PROFILE_TRUE_VALUE"
+                    }                    
+                ]
+            }
+        },
+        {
+            "name" : "view",
+            "completion" : "default",
+            "defaultValue" : "false",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_VIEW",
             "selectConfig" : {
                 "name" : "select-open",
                 "items" : [
@@ -96,6 +117,15 @@
                 ]
             }
         },
+        {
+            "name" : "print_from",
+            "completion" : "default",
+            "defaultValue" : "",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "input",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM"
+        },                
         {
             "name" : "allowed_operations",
             "completion" : "default",

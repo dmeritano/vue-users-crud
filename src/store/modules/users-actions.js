@@ -15,12 +15,6 @@ export const login = async (context, payload) => {
       await apiDms.login(payload)      
       if (appConfig.getUserProfileDocument){
         const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)
-        /*
-        const profile = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
-          ,appConfig.userProfileDocumentSelectedAttributes)
-        
-          console.log(profile);
-        */
         const profile = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
             ,appConfig.userProfileAttributes)
   
@@ -172,14 +166,14 @@ export const getUserProfileDocument = async (context, username) => {
   try {
     const foundDocument = await utils.searchAndGetUserProfileDocument(username)      
     const profileAttributes = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
-      ,appConfig.userProfileAttributes)    
+      ,appConfig.userProfileAttributes) 
     
     response["id"] = foundDocument.data.attributes["#Id"]
     response["profileAttributes"] = profileAttributes
     
     console.info("Profile loaded for user", username)
-
     return response
+
   } catch (error) {
     context.commit("error", {error : getErrorResponse(error) })      
   } finally {

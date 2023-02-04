@@ -47,6 +47,7 @@
   "CHANGEPASSWORD_INPUT_NEWPASSREPEAT" : "Repeat new password", 
   "CHANGEPASSWORD_WARNING_MUST_CHANGEPASS" : "Password expired. You need to change your password to continue",
   "USERPROFILE_MAIN_TITLE" : "Profile info for user",
+  "USERPROFILE_PROFILE_UPDATED" : "Profile data updated successfully",
   "CONFIRM_DIALOG_TITLE" : "Information",
   "ALERT_DIALOG_TITLE" : "Information",
   "GENERAL_CANCEL_BTN" : "Cancel",
@@ -74,6 +75,8 @@
   "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD" : "Allow access to this App",
   "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE" : "Last password update",
   "PROFILE_ATTRIBUTE_LABEL_OPEN" : "Allow open file",
+  "PROFILE_ATTRIBUTE_LABEL_VIEW" : "Visualize document's views",
   "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Allow print",
+  "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM" : "Print from (these IP addresses)",
   "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Allowed operations" 
 }
