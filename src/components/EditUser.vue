@@ -31,56 +31,59 @@
               </li>
             </ul>
           </div>
-          <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_USERNAME")}}</label>
-            <div class="col-sm-8">
-              <input
-                type="text"
-                class="form-control custom-input"
-                v-model="user.user"
-                ref="username"
-                :disabled="isDisabled"
-              />
+          <form @submit.prevent>
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">{{$t("EDITUSER_USERNAME")}}</label>
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  v-model="user.user"
+                  ref="username"
+                  :disabled="isDisabled"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_NAME")}}</label>
-            <div class="col-sm-8">
-              <input
-                type="text"
-                class="form-control custom-input"
-                v-model="user.name"
-                ref="name"
-              />
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">{{$t("EDITUSER_NAME")}}</label>
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control custom-input"
+                  v-model="user.name"
+                  ref="name"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_SURNAME")}}</label>
-            <div class="col-sm-8">
-              <!-- TRICK para evitar autocompletado de los navegadores 
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">{{$t("EDITUSER_SURNAME")}}</label>
+              <div class="col-sm-8">
+                <!-- TRICK para evitar autocompletado de los navegadores 
+                    readonly
+                    onfocus="this.removeAttribute('readonly');"
+                    Poniendolo en este campo tambien me soluciona el autocomplete del campo siguiente (pass)            
+                  -->              
+                <input
+                  type="text"
                   readonly
                   onfocus="this.removeAttribute('readonly');"
-                  Poniendolo en este campo tambien me soluciona el autocomplete del campo siguiente (pass)            
-                -->              
-              <input
-                type="text"
-                readonly
-                onfocus="this.removeAttribute('readonly');"
-                class="form-control custom-input"
-                v-model="user.surname"
-              />
+                  class="form-control custom-input"
+                  v-model="user.surname"
+                />
+              </div>
             </div>
-          </div>
-          <div class="row mb-3">
-            <label class="col-sm-4 col-form-label">{{$t("EDITUSER_PASSWORD")}}</label>
-            <div class="col-sm-8">
-              <input
-                type="password"
-                class="form-control custom-input"
-                v-model="user.pass"
-              />
-            </div>
-          </div>           
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">{{$t("EDITUSER_PASSWORD")}}</label>
+              <div class="col-sm-8">
+                <input
+                  type="password"
+                  autocomplete="off"
+                  class="form-control custom-input"
+                  v-model="user.pass"
+                />
+              </div>
+            </div>  
+          </form>         
         </div>
         <div class="modal-footer">
           <div>
@@ -139,7 +142,9 @@ export default {
       //Return router-link to, with named route and params      
       return {
         "name" : "profile",
-        "params" : { "username" : this.currentUser.user.toLowerCase()}
+        "params" : { "username" : this.currentUser.user.toLowerCase()},
+        "query" : { surname : this.currentUser.surname.toUpperCase(), 
+                    name : this.currentUser.name.toUpperCase()}
       }
     }
   },

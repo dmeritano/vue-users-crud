@@ -46,11 +46,13 @@
   "CHANGEPASSWORD_INPUT_NEWPASS" : "New password",
   "CHANGEPASSWORD_INPUT_NEWPASSREPEAT" : "Repeat new password", 
   "CHANGEPASSWORD_WARNING_MUST_CHANGEPASS" : "Password expired. You need to change your password to continue",
+  "USERPROFILE_MAIN_TITLE" : "Profile info for user",
   "CONFIRM_DIALOG_TITLE" : "Information",
   "ALERT_DIALOG_TITLE" : "Information",
   "GENERAL_CANCEL_BTN" : "Cancel",
   "GENERAL_CONFIRM_BTN" : "Confirm",
   "GENERAL_SAVE_BTN" : "Save",  
+  "GENERAL_DATA_UNDEFINED" : "NOT DEFINED",
   "FOOTER_LINE1" : "{'@'} ADDALIA. All rights reserved.",
   "API_ERRORS_INVALID_USER_PASS" : "Invalid user or password",
   "API_ERRORS_GENERAL" : "An error has occurred in the request",
@@ -65,5 +67,13 @@
   "APP_UNKNOWN_ERROR" : "Unknown error",
   "APP_USERPERMISIONS_ERROR" : "You do not have access to user administration",
   "APP_INVALID_DMS_VERSION" : "Application only works with DMS repositories version 6 or higher (configured: {version})",
-  "APP_USER_DOCUMENT_PROFILE_NOT_FOUND" : "Profile for user {user} does not exist. The data cannot be updated"
+  "APP_USER_DOCUMENT_PROFILE_NOT_FOUND" : "Profile for user {user} does not exist. The data cannot be updated",
+  "PROFILE_TRUE_VALUE" : "Yes",
+  "PROFILE_FALSE_VALUE" : "No",  
+  "PROFILE_ATTRIBUTE_LABEL_USERNAME" : "Username",
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD" : "Allow access to this App",
+  "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE" : "Last password update",
+  "PROFILE_ATTRIBUTE_LABEL_OPEN" : "Allow open file",
+  "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Allow print",
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Allowed operations" 
 }

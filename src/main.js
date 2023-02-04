@@ -17,7 +17,6 @@ import '@/assets/css/global.css';
 
 //Configure router
 router.beforeEach( (to, from, next) => {
-    console.log(to);
     if (to.matched.some(route => route.meta.requiresAuth)){
         if(!store.getters.authenticated){
             next('/login')

@@ -16,20 +16,112 @@
             "name" : "user_name",
             "completion" : "auto",
             "defaultValue" : "",
-            "completionAutoFunction" : "fn_user"
+            "completionAutoFunction" : "fn_user",
+            "editable" : false,
+            "htmlControl" : "input",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_USERNAME"
         },
         {
             "name" : "allow_users_crud",
             "completion" : "default",
             "defaultValue" : "false",
-            "completionAutoFunction" : ""    
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD",
+            "selectConfig" : {
+                "name" : "select-open",
+                "items" : [
+                    {
+                        "valueAttribute" : "false",
+                        "i18nTextId" : "PROFILE_FALSE_VALUE"
+                    },
+                    {
+                        "valueAttribute" : "true",
+                        "i18nTextId" : "PROFILE_TRUE_VALUE"
+                    }                    
+                ]
+            }            
         },
         {
             "name" : "last_password_update",
             "completion" : "auto",
             "defaultValue" : "",
-            "completionAutoFunction" : "fn_last_password_update"    
-        }        
+            "completionAutoFunction" : "fn_last_password_update",
+            "editable" : true,
+            "htmlControl" : "input",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE"
+        },
+        {
+            "name" : "open",
+            "completion" : "default",
+            "defaultValue" : "false",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_OPEN",
+            "selectConfig" : {
+                "name" : "select-open",
+                "items" : [
+                    {
+                        "valueAttribute" : "false",
+                        "i18nTextId" : "PROFILE_FALSE_VALUE"
+                    },
+                    {
+                        "valueAttribute" : "true",
+                        "i18nTextId" : "PROFILE_TRUE_VALUE"
+                    }                    
+                ]
+            }
+        },
+        {
+            "name" : "print",
+            "completion" : "default",
+            "defaultValue" : "false",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_PRINT",            
+            "selectConfig" : {
+                "name" : "select-print",
+                "items" : [
+                    {
+                        "valueAttribute" : "false",
+                        "i18nTextId" : "PROFILE_FALSE_VALUE"
+                    },
+                    {
+                        "valueAttribute" : "true",
+                        "i18nTextId" : "PROFILE_TRUE_VALUE"
+                    }                    
+                ]
+            }
+        },
+        {
+            "name" : "allowed_operations",
+            "completion" : "default",
+            "defaultValue" : "",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select-multiple",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS",            
+            "selectConfig" : {
+                "name" : "select-operations",
+                "items" : [
+                    {
+                        "valueAttribute" : "Expediente_Vehiculos",
+                        "i18nTextId" : ""
+                    },
+                    {
+                        "valueAttribute" : "Expediente_Impedidos",
+                        "i18nTextId" : ""
+                    },
+                    {
+                        "valueAttribute" : "Expediente_Medico",
+                        "i18nTextId" : ""
+                    }                    
+                ]
+            }
+        }                             
     ],
     "controlPasswordExpiration" : false,
     "passwordExpirationDateAttribute" : "last_password_update",

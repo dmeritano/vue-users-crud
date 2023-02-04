@@ -26,6 +26,7 @@
           <div class="col-md-12 form-group">
             <input
               type="password"
+              autocomplete="off"
               class="form-control custom-input"
               id="pass"
               v-model="pass"

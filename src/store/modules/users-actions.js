@@ -15,8 +15,15 @@ export const login = async (context, payload) => {
       await apiDms.login(payload)      
       if (appConfig.getUserProfileDocument){
         const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)
+        /*
         const profile = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
           ,appConfig.userProfileDocumentSelectedAttributes)
+        
+          console.log(profile);
+        */
+        const profile = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
+            ,appConfig.userProfileAttributes)
+  
         context.commit("userProfile", {profile}, { root: true })
         console.info("User profile document loaded")
         if (appConfig.controlPasswordExpiration){          
@@ -154,6 +161,50 @@ export const updateUser = async (context, payload) => {
   } finally {
     context.commit("loading", {status:false}, { root: true })    
   }
+}
+
+export const getUserProfileDocument = async (context, username) => {
+
+  context.commit("loading", {status:true}, { root: true })   
+  context.commit("error", {error : getErrorResponse() }) 
+
+  let response = {}
+  try {
+    const foundDocument = await utils.searchAndGetUserProfileDocument(username)      
+    const profileAttributes = utils.getProfileObjectWithConfiguredKeys(foundDocument.data.attributes
+      ,appConfig.userProfileAttributes)    
+    
+    response["id"] = foundDocument.data.attributes["#Id"]
+    response["profileAttributes"] = profileAttributes
+    
+    console.info("Profile loaded for user", username)
+
+    return response
+  } catch (error) {
+    context.commit("error", {error : getErrorResponse(error) })      
+  } finally {
+    context.commit("loading", {status:false}, { root: true })    
+  }
+
+}
+
+export const updateUserProfileDocument = async (context, payload) => {
+  
+  context.commit("loading", {status:true}, { root: true })   
+  context.commit("error", {error : getErrorResponse() }) 
+  
+  try {
+    let docPayload = {
+      "attributes" : payload.attributes
+    }    
+    await apiDms.updateDocument(payload.id, docPayload) 
+    console.info("Profile updated for user", payload.user)   
+  } catch (error) {    
+    context.commit("error", {error : getErrorResponse(error) })      
+  } finally {
+    context.commit("loading", {status:false}, { root: true })    
+  }
+
 }
 
 export const deleteUser = async (context, username) => {

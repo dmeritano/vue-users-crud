@@ -26,3 +26,5 @@ En la configuración que se escoja, habría que determinar qué campos se pueden
 permitir modificar, los de autocompletado tampoco...) y para los campos que SI se puedan editar quizás
 se necesario poner validaciones y posibles origen de datos, como puede ser una lista/array.
 
+TAREA 2 FINALIZADA
+==================

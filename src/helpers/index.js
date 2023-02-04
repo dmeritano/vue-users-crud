@@ -78,8 +78,7 @@ export function getErrorResponse(error){
         }else if (error.responseData.status == "0008"){
           resp.i18nMsg = i18n.global.t("APP_BADREQUEST_ERROR")
         }else{
-          //Tratar otros codigo de error del api. Por ahora queda lo que viene en response.data
-          resp.i18nMsg = error.responseData.message //Sin traduccion
+          //Tratar otros codigo de error del api. Por ahora queda lo que viene en response.data          
         }
       }
       return resp
