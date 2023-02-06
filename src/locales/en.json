@@ -68,15 +68,5 @@
   "APP_UNKNOWN_ERROR" : "Unknown error",
   "APP_USERPERMISIONS_ERROR" : "You do not have access to user administration",
   "APP_INVALID_DMS_VERSION" : "Application only works with DMS repositories version 6 or higher (configured: {version})",
-  "APP_USER_DOCUMENT_PROFILE_NOT_FOUND" : "Profile for user {user} does not exist. The data cannot be updated",
-  "PROFILE_TRUE_VALUE" : "Yes",
-  "PROFILE_FALSE_VALUE" : "No",  
-  "PROFILE_ATTRIBUTE_LABEL_USERNAME" : "Username",
-  "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD" : "Allow access to this App",
-  "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE" : "Last password update",
-  "PROFILE_ATTRIBUTE_LABEL_OPEN" : "Allow open file",
-  "PROFILE_ATTRIBUTE_LABEL_VIEW" : "Visualize document's views",
-  "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Allow print",
-  "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM" : "Print from (these IP addresses)",
-  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Allowed operations" 
+  "APP_USER_DOCUMENT_PROFILE_NOT_FOUND" : "Profile for user {user} does not exist. The data cannot be updated"
 }

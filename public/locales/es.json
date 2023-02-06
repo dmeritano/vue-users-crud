@@ -1,0 +1,12 @@
+{
+  "PROFILE_TRUE_VALUE" : "Si",
+  "PROFILE_FALSE_VALUE" : "No",
+  "PROFILE_ATTRIBUTE_LABEL_USERNAME" : "Usuario",
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD" : "Permitir uso de esta aplicación",
+  "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE" : "Ultima actualización de contraseña",
+  "PROFILE_ATTRIBUTE_LABEL_OPEN" : "Permitir abrir expediente",
+  "PROFILE_ATTRIBUTE_LABEL_VIEW" : "Visualizar las vistas del documento",
+  "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Permitir imprimir",
+  "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM" : "Imprimir desde (direcciones IP)",
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Operaciones permitidas"
+}

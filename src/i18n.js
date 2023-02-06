@@ -8,7 +8,15 @@ import { createI18n } from 'vue-i18n'
  * See: https://github.com/intlify/vue-i18n-loader#rocket-i18n-resource-pre-compilation
  */
 function loadLocaleMessages() {
-  const locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  
+  /* -- 
+     Load APP messages contained en @/locales 
+     APP configurators cannot modify these messages because build process 
+     no exposes these language [lang].json files, like any other resources 
+     under src folder.
+  -- */
+  
+  let locales = require.context('./locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages = {}
   locales.keys().forEach(key => {
     const matched = key.match(/([A-Za-z0-9-_]+)\./i)
@@ -17,6 +25,26 @@ function loadLocaleMessages() {
       messages[locale] = locales(key).default
     }
   })
+  
+
+  /* --
+    No we load any translations that may be in the /public/locales folder. 
+    These translations are maintained by the App's configurators, and are the ones 
+    that are mainly used in the configuration of the attributes that is done 
+    in /public/config.json.  
+  -- */ 
+
+  locales = require.context('/public/locales', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  locales.keys().forEach(key => {
+    const matched = key.match(/([A-Za-z0-9-_]+)\./i)
+    if (matched && matched.length > 1) {
+      const locale = matched[1]
+      for (const [k, v] of Object.entries(locales(key))) {
+        messages[locale][k]=v
+      }      
+    }
+  })
+
   return messages
 }
 
