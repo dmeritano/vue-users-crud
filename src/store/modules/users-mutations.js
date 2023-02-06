@@ -1,6 +1,6 @@
 /* Users store mutations */
 
-import { initialStateUsersStore } from '../../helpers'
+import { initialStateUsersStore } from './users-helpers'
 
 export const error = (state, payload) => {
     state.error = payload.error
@@ -16,6 +16,10 @@ export const users = (state, payload) => {
 
 export const addUser = (state, payload) => {
     state.users.push(payload)
+}
+
+export const usersLoadedFromServer = (state, payload) => {
+    state.usersLoadedFromServer = payload.status
 }
 
 export const updateUser = (state, payload) => {

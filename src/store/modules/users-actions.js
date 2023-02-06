@@ -83,6 +83,7 @@ export const getUsers = async (context) => {
         .getUsers()
         .then((res) => {
           context.commit("users", res.data.users)
+          context.commit("usersLoadedFromServer", {status:true})
         })
         .catch( (error) => {
           context.commit("error", {error : getErrorResponse(error) })                    

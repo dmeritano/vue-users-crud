@@ -77,6 +77,7 @@ export default {
   },
   computed: {
     ...mapGetters({error: 'moduleUsers/error'}),
+    ...mapGetters({usersLoaded: 'moduleUsers/usersLoadedFromServer'}),
     ...mapGetters({userName: 'user'}),
     users(){
       let usersSorted = this.$store.getters["moduleUsers/users"] 
@@ -146,7 +147,9 @@ export default {
         this.showAlertDialog = true
       }        
     }
-    loadUsers()
+    if (!this.usersLoaded){
+      loadUsers()
+    }    
   }
 }
 

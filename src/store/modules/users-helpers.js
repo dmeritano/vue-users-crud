@@ -3,17 +3,19 @@
 import { appConfig } from '@/main'
 import apiDms from "@/services/service-apidms"
 import i18n from '@/i18n.js'
+import { getErrorResponse } from '@/helpers'
 
-//export function getProfileObjectWithConfiguredKeys(allFieldsObj, fieldsToInclude){  
+export function initialStateUsersStore () {
+  return {
+    dmsInfo:{},
+    users:[],
+    usersLoadedFromServer:false,
+    error: getErrorResponse()
+  }
+}
+
 export function getProfileObjectWithConfiguredKeys(allFieldsObj, userProfileAttributes){    
     let response = {}
-    /*
-    for ( const field of fieldsToInclude){
-      if (field in allFieldsObj){
-        response[field] = allFieldsObj[field]
-      }
-    }
-    return response*/
     for (let i = 0; i < userProfileAttributes.length; i++) {
       const attr = userProfileAttributes[i];
       response[attr.name] = attr.defaultValue //Empty attributes no received from API      

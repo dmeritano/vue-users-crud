@@ -3,10 +3,24 @@ Vue 3 - Vanilla Javascript - ES6
 Se parte de proyecto base vue-base (dmeritano.github.com)
 (*) Solo funciona con repositorios DMS versión 6 o superior.
 
+==Notas version 1.1.2==
+
+### Mejoras y correciones
+
+Se agrega titulo con el nombre de la aplicacion en AppHeader
+
+Se create variable en state de users ( usersLoadedFromServer )
+Esta variable se pone en true la primera vez que el usuario obtiene la lista de usuarios
+Luego, cuando el usuario navega entre las demas paginas de la aplicacion, al volver a home
+si esa variable esta en true no se pide al servidor nuevamente la lista de usuarios.
+
+El agregado, modificacion y elmiminado de usuarios ya se encargar de mantener actualizado
+la variable "users" del state de usuarios, con lo cual estaria sincronizada con los usuarios
+en el servidor.
+
+
 
 ==Notas version 1.1.1==
-
-
 ### Mejoras y correciones
 
 Para las traducciones relacionadas con la pagina UserProfile.vue (lables y options de los select), 

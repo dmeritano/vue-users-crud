@@ -8,3 +8,6 @@ export const users = (state) => {
 export const error = (state) => {
     return state.error
 }
+export const usersLoadedFromServer = (state) => {
+    return state.usersLoadedFromServer
+}

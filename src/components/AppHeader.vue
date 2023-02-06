@@ -18,15 +18,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link to="/" class="nav-link">{{$t("HEADER_HOME_LINK")}}</router-link>
+            <router-link to="/" class="nav-link">{{
+              $t("HEADER_HOME_LINK")
+            }}</router-link>
           </li>
           <li class="nav-item" v-if="showAboutPage">
-            <router-link to="/about" class="nav-link">{{$t("HEADER_ABOUT_LINK")}}</router-link>
-          </li>          
+            <router-link to="/about" class="nav-link">{{
+              $t("HEADER_ABOUT_LINK")
+            }}</router-link>
+          </li>
         </ul>
-        <ul class="navbar-nav me-5">
-   
 
+        <div>
+          <h3 class="mx-auto header-title">{{ $t("HEADER_MAIN_TITLE") }}</h3>
+        </div>
+
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
@@ -36,16 +43,35 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              <img :src="flag" /><span><small class="ms-1">{{$t("HEADER_LOCALE_SHORT_NAME")}}</small></span>
+              <img :src="flag" /><span
+                ><small class="ms-1">{{
+                  $t("HEADER_LOCALE_SHORT_NAME")
+                }}</small></span
+              >
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" style="margin: 0"> <!-- margin 0 to remove poper warning -->
-              <li><a class="dropdown-item" href="#" @click="idioma('es')">{{$t("HEADER_LOCALE_LONG_NAME_ES")}}</a></li>
-              <li><a class="dropdown-item" href="#" @click="idioma('en')">{{$t("HEADER_LOCALE_LONG_NAME_EN")}}</a></li>
+            <ul
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdown"
+              style="margin: 0"
+            >
+              <!-- margin 0 to remove poper warning -->
+              <li>
+                <a class="dropdown-item" href="#" @click="idioma('es')">{{
+                  $t("HEADER_LOCALE_LONG_NAME_ES")
+                }}</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click="idioma('en')">{{
+                  $t("HEADER_LOCALE_LONG_NAME_EN")
+                }}</a>
+              </li>
             </ul>
           </li>
 
           <li class="nav-item username" v-if="authenticated">
-            <router-link to="/credentials" class="nav-link">{{user}}</router-link>
+            <router-link to="/credentials" class="nav-link">{{
+              user
+            }}</router-link>
           </li>
 
           <li class="nav-item" v-if="!authenticated">
@@ -53,7 +79,7 @@
               to="/login"
               v-if="!authenticated"
               class="nav-link text-white me-3"
-              >{{$t("HEADER_LOGIN_LINK")}}</router-link
+              >{{ $t("HEADER_LOGIN_LINK") }}</router-link
             >
           </li>
           <li class="nav-item" v-if="authenticated">
@@ -62,7 +88,7 @@
               @click.prevent="logout"
               v-if="authenticated"
               class="nav-link text-white me-3"
-              >{{$t("HEADER_LOGOUT_LINK")}}</a
+              >{{ $t("HEADER_LOGOUT_LINK") }}</a
             >
           </li>
         </ul>
@@ -72,33 +98,33 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex"
 export default {
   data() {
     return {
-      flag : "",
-      showAboutPage : this.$AppConfig.showAboutPage
-    }    
-  },  
+      flag: "",
+      showAboutPage: this.$AppConfig.showAboutPage,
+    }
+  },
   computed: {
     authenticated() {
       return this.$store.getters.authenticated
     },
-    user(){
+    user() {
       let username = this.$store.getters.user
-      if (username.length > 10){
-        username = username.substring(0,10)
+      if (username.length > 10) {
+        username = username.substring(0, 10)
       }
       username += "..."
       return username
-    }
+    },
   },
   methods: {
-    ...mapActions({      
-      setLoading: "loading"
-    }),    
+    ...mapActions({
+      setLoading: "loading",
+    }),
     async logout() {
-      await this.$store.dispatch("moduleUsers/logout")      
+      await this.$store.dispatch("moduleUsers/logout")
       this.$router.push("/login")
     },
     idioma(idioma) {
@@ -109,17 +135,17 @@ export default {
         this.$i18n.locale = "en"
         this.flag = require("@/assets/images/great_britain.svg")
       }
-      localStorage.setItem('last-locale', idioma)
-    }    
+      localStorage.setItem("last-locale", idioma)
+    },
   },
   mounted() {
-      document.title = this.$t("HTML_HEAD_TITLE_BASE")
+    document.title = this.$t("HTML_HEAD_TITLE_BASE")
   },
-  created(){
-      this.$i18n.locale === "es" ?
-      this.flag = require("@/assets/images/spain.svg") :
-      this.flag = require("@/assets/images/great_britain.svg")
-  }
+  created() {
+    this.$i18n.locale === "es"
+      ? (this.flag = require("@/assets/images/spain.svg"))
+      : (this.flag = require("@/assets/images/great_britain.svg"))
+  },
 }
 </script>
 
@@ -143,5 +169,10 @@ export default {
 .logo-menu > img {
   width: 135px;
   height: 33px;
+}
+.header-title {
+  font-size: 27px;
+  color: white;
+  font-weight: bolder;
 }
 </style>

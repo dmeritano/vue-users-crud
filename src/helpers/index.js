@@ -32,14 +32,6 @@ const emptyErrorResponse = {
     errorAtrilSessionNotPresent : false    
 }
 
-export function initialStateUsersStore () {
-  return {
-    dmsInfo:{},
-    users:[],
-    error: getErrorResponse()
-  }
-}
-
 export function getErrorResponse(error){
 
     const resp = {...emptyErrorResponse}
