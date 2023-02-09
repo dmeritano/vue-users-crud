@@ -18,14 +18,14 @@ var fs = require("fs-extra");
 
 //Copy Extra Files
 const DIST_FOLDER = "./dist"
-const TARGE_WAR_FOLDER = "./target/"
+const TARGET_WAR_FOLDER = "./target"
 const METAINF_TARGET_DIR = DIST_FOLDER + "/META-INF"
 const WEBINF_TARGET_DIR = DIST_FOLDER + "/WEB-INF"
 const METAINF_SOURCE_DIR = "war-files/META-INF"
 const WEBINF_SOURCE_DIR = "war-files/WEB-INF"
 const APP_NAME = "DmsUsersCrudApplication"
 const APP_VERSION = packageJSON.version
-const OUTPUT_WAR = TARGE_WAR_FOLDER + APP_NAME + "-" + APP_VERSION + ".war"
+const OUTPUT_WAR = TARGET_WAR_FOLDER + "/" + APP_NAME + "-" + APP_VERSION + ".war"
 
 
 console.log("\n----------------------------------------------------");
@@ -48,6 +48,8 @@ if (!fs.pathExistsSync(WEBINF_SOURCE_DIR)){
 //We make sure that the META-INF and WEB-INF folders do not exist in distribution folder
 fs.removeSync(METAINF_TARGET_DIR)
 fs.removeSync(WEBINF_TARGET_DIR)
+fs.removeSync(TARGET_WAR_FOLDER)
+fs.ensureDirSync(TARGET_WAR_FOLDER)
 console.log("Step 1 finished");
 
 //Step 2
