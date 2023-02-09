@@ -23,7 +23,7 @@ const METAINF_TARGET_DIR = DIST_FOLDER + "/META-INF"
 const WEBINF_TARGET_DIR = DIST_FOLDER + "/WEB-INF"
 const METAINF_SOURCE_DIR = "war-files/META-INF"
 const WEBINF_SOURCE_DIR = "war-files/WEB-INF"
-const APP_NAME = packageJSON.name
+const APP_NAME = "DmsUsersCrudApplication"
 const APP_VERSION = packageJSON.version
 const OUTPUT_WAR = TARGE_WAR_FOLDER + APP_NAME + "-" + APP_VERSION + ".war"
 
