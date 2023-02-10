@@ -134,11 +134,28 @@ export const updateUser = async (context, payload) => {
     context.commit("loading", {status:true}, { root: true })   
     context.commit("error", {error : getErrorResponse() }) 
     
+
+    //User pass must be updated with other api endpoint
+    let passToUpdate = ""
+    if(payload.pass.trim().length > 0){
+      passToUpdate = payload.pass.trim()
+      payload.pass = "" //Update user endpoint not working (not update pass)
+    }
     //Update user perse
     const response = await apiDms.updateUser(payload) 
     console.info("User updated")
 
-    if(payload.pass.trim().length == 0 &&
+    if (passToUpdate != ""){
+      //Update password
+      await apiDms.updatePassword({
+        "user" : payload.user,
+        "currentpass" : "",
+        "newpass" : passToUpdate
+      })
+      console.info("User password updated")
+    }
+
+    if(passToUpdate != "" &&
       appConfig.createOrEditUserProfileDocument &&
       appConfig.controlPasswordExpiration){
         const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)        

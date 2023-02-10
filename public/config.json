@@ -1,6 +1,6 @@
 {
-    "serviceBaseUrl" : "http://localhost/DmsRestServiceDTOP411",
-    "serviceBaseUrl2" : "http://localhost/DmsRestServiceDPConsulta",
+    "serviceBaseUrl2" : "http://localhost/DmsRestServiceDTOP411",
+    "serviceBaseUrl" : "http://localhost/DmsRestService-4.13-SNAPSHOT",
     "showAppFooter" : true,
     "showAboutPage" : true,
     "allowedUsers" : ["admin", "testuser", "david"],
