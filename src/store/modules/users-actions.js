@@ -3,7 +3,6 @@ import apiDms from "@/services/service-apidms"
 import { getErrorResponse } from '../../helpers'
 import { appConfig } from '@/main'
 import i18n from '@/i18n.js'
-//import { getProfileFieldValue } from '../../helpers/fields-completion-plugins'
 import * as utils from './users-helpers'
 
 export const login = async (context, payload) => {
@@ -67,7 +66,7 @@ export const dmsInfo = async (context) => {
 export const getUsers = async (context) => {
     
     let error = getErrorResponse()
-    const info = context.getters["dmsInfo"];
+    const info = context.getters["dmsInfo"];    
     
     if (info.platform !== "Atril6"){
       error.hasError = true
@@ -116,7 +115,11 @@ export const addUser = async (context, payload) => {
       console.info("User created");
 
       if (appConfig.createOrEditUserProfileDocument){
-        const profileDoc = utils.composeProfileDocument(payload.user)
+        //Get ServerTime updated 
+        context.dispatch("dmsInfo")
+        const dmsinfo = context.getters["dmsInfo"];
+        //        
+        const profileDoc = utils.composeProfileDocument(payload.user,dmsinfo.server_time)
         await apiDms.addDocument(appConfig.userProfileDocumentsParentIdContainer,profileDoc)
         console.info("User profile document created");  
       }      
@@ -134,7 +137,6 @@ export const updateUser = async (context, payload) => {
     context.commit("loading", {status:true}, { root: true })   
     context.commit("error", {error : getErrorResponse() }) 
     
-
     //User pass must be updated with other api endpoint
     let passToUpdate = ""
     if(payload.pass.trim().length > 0){
@@ -158,12 +160,22 @@ export const updateUser = async (context, payload) => {
     if(passToUpdate != "" &&
       appConfig.createOrEditUserProfileDocument &&
       appConfig.controlPasswordExpiration){
-        const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)        
+
+        //Get ServerTime updated 
+        context.dispatch("dmsInfo")
+        const dmsinfo = context.getters["dmsInfo"];
+        //        
+        const pluginData = {
+          "user" : payload.user,
+          "serverTime" : dmsinfo.server_time
+        }        
+
+        const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)                
         let docPayload = {
           "attributes" : {}
-        }
+        }     
         docPayload.attributes[appConfig.passwordExpirationDateAttribute] = 
-          utils.getProfileFieldValue(appConfig.expirationAttributeSetValueFunction)
+          utils.getProfileFieldValue(appConfig.expirationAttributeSetValueFunction,pluginData)
         await apiDms.updateDocument(foundDocument.data.attributes["#Id"], docPayload)     
         console.log("Update profile document updated");   
     }          
@@ -261,8 +273,29 @@ export const updateUserPassword = async (context, payload) => {
 
     delete payload.newpassrepeat //No required on PUT payload
     await apiDms.updatePassword(payload)
-
+    
     if (appConfig.controlPasswordExpiration){
+
+        //Get ServerTime updated 
+        context.dispatch("dmsInfo")
+        const dmsinfo = context.getters["dmsInfo"];
+        //        
+        const pluginData = {
+          "user" : payload.user,
+          "serverTime" : dmsinfo.server_time
+        }        
+
+        const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)                
+        let docPayload = {
+          "attributes" : {}
+        }     
+        docPayload.attributes[appConfig.passwordExpirationDateAttribute] = 
+          utils.getProfileFieldValue(appConfig.expirationAttributeSetValueFunction,pluginData)
+        await apiDms.updateDocument(foundDocument.data.attributes["#Id"], docPayload)     
+        console.log("Update profile document updated");  
+
+
+      //Finnaly
       context.commit("userMustChangePassword", {status:false}, { root: true })
     }
 

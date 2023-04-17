@@ -168,7 +168,7 @@ Ejemplo:
 
 > controlPasswordExpiration
 
-Indica si cuando un usuario se autentica se controla **true** o no **false** la fecha desde la última actualización de la password, para determinar si ha expirado. Para esto se apoya en la variable `passwordExpirationDateAttribute` y `maximumPasswordAge`, conjuntamente con la fecha actual, la que por ahora se toma del sistema del usuario pero que por cuestiones de seguridad se va a obtener desde el backend en el verbo dmsInfo del API del DMS ( **modificación del API en curso** ).
+Indica si cuando un usuario se autentica se controla **true** o no **false** la fecha desde la última actualización de la password, para determinar si ha expirado. Para esto se apoya en la variable `passwordExpirationDateAttribute` y `maximumPasswordAge`, conjuntamente con la fecha actual la cual se obtiene del servidor a partir del verbo GET dms/info.
 
 **IMPORTANTE** : si un usuario se autentica y se determina que su password ha vencido, la App lo redireccionará a la página de actualización de contraseña. Si no lo hace no podrá acceder a la página principal (Lista de usuarios).
 
@@ -183,4 +183,3 @@ La cantidad, en días, que como máximo tiene que tener una contraseña desde su
 > expirationAttributeSetValueFunction
 
 Cuando se actualiza la contraseña del propio usuario desde la página de cambio de contraseña o desde la ventana de edición de usuarios para el usuario logueado u otro, la App actualiza el atributo con la última actualización de la contraseña y para completar su valor utiliza la función configurada en este parámetro. Ejemplo: `expirationAttributeSetValueFunction : "fn_last_password_update"`
-

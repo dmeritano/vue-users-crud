@@ -153,7 +153,7 @@
             }
         }                             
     ],
-    "controlPasswordExpiration" : false,
+    "controlPasswordExpiration" : true,
     "passwordExpirationDateAttribute" : "last_password_update",
     "maximumPasswordAge": 30,
     "expirationAttributeSetValueFunction" : "fn_last_password_update"
