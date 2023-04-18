@@ -173,7 +173,29 @@
                     }                    
                 ]
             }            
-        }                
+        },
+        {
+            "name" : "allow_digitalization",
+            "completion" : "default",
+            "defaultValue" : "false",
+            "completionAutoFunction" : "",
+            "editable" : true,
+            "htmlControl" : "select",
+            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOW_DIGITALIZATION",
+            "selectConfig" : {
+                "name" : "select-open",
+                "items" : [
+                    {
+                        "valueAttribute" : "false",
+                        "i18nTextId" : "PROFILE_FALSE_VALUE"
+                    },
+                    {
+                        "valueAttribute" : "true",
+                        "i18nTextId" : "PROFILE_TRUE_VALUE"
+                    }                    
+                ]
+            }            
+        }                        
     ],
     "controlPasswordExpiration" : true,
     "passwordExpirationDateAttribute" : "last_password_update",
