@@ -8,5 +8,5 @@
   "PROFILE_ATTRIBUTE_LABEL_VIEW" : "Visualize document's views",
   "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Allow print",
   "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM" : "Print from (these IP addresses)",
-  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Allowed operations" 
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Allowed operations (ConsultaWeb)" 
 }
