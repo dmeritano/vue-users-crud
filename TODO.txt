@@ -1,2 +1,16 @@
 TO-DO
 ==============
+AL HACER UN BUILD, 
+en los locales que tengo en src/locales se le agregan
+los que estan en /public/locales, con lo cual por mas 
+que luego el configurador modifique los json en /public/locales
+estos no se vuelven a meter en los locales por defecto, con ello
+no funciona como se esperaba. 
+Mejorar en i18n.js este asunto
+
+Quizás haya que buscar otra forma alternativa para las traducciones
+personalizadas.
+
+Por ahora se soluciona haciendo un build/generando el war.
+
+

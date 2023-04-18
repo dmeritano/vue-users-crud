@@ -8,5 +8,6 @@
   "PROFILE_ATTRIBUTE_LABEL_VIEW" : "Visualizar las vistas del documento",
   "PROFILE_ATTRIBUTE_LABEL_PRINT" : "Permitir imprimir",
   "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM" : "Imprimir desde (direcciones IP)",
-  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Operaciones permitidas (ConsultaWeb)"
+  "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS" : "Operaciones permitidas (ConsultaWeb)",
+  "PROFILE_ATTRIBUTE_LABEL_ALLOW_ACTIVITIES" : "Permitir Revisión"
 }
