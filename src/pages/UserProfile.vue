@@ -197,11 +197,12 @@ export default {
         }
     },
     created(){
+        /*
         this.getUserProfile(this.userName)
             .then((response) => {
-                /* For attributes set to "select-multiple", which in the dms save as a string with 
-                comma separated values, I have to convert (split) the string to an array so that
-                the v-model associated with the SELECT control of type "multiple" works. correctly */
+                //For attributes set to "select-multiple", which in the dms save as a string with 
+                //comma separated values, I have to convert (split) the string to an array so that
+                //the v-model associated with the SELECT control of type "multiple" works. correctly
                 for (const [key, value] of Object.entries(response.profileAttributes)) {
                     const configuredAttrs = this.$AppConfig.userProfileAttributes            
                     let elem = configuredAttrs.filter(e => {return e.name === key})                    
@@ -210,8 +211,25 @@ export default {
                     }
                 }
                 this.attributes = response.profileAttributes
-                this.profileDocId = response.id
-        })        
+                this.profileDocId = response.id              
+        })
+        */
+        const loadProfile = async () => {
+            const response = await this.getUserProfile(this.userName)
+            //For attributes set to "select-multiple", which in the dms save as a string with 
+            //comma separated values, I have to convert (split) the string to an array so that
+            //the v-model associated with the SELECT control of type "multiple" works. correctly
+            for (const [key, value] of Object.entries(response.profileAttributes)) {
+                const configuredAttrs = this.$AppConfig.userProfileAttributes            
+                let elem = configuredAttrs.filter(e => {return e.name === key})                    
+                if (elem && elem[0].htmlControl.toLowerCase() === "select-multiple"){
+                    response.profileAttributes[key] = value.split(",")
+                }
+            }
+            this.attributes = response.profileAttributes
+            this.profileDocId = response.id             
+        }
+        loadProfile()
     }
 }
 </script>

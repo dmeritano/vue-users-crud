@@ -3,8 +3,8 @@
     <div class="spinner">
       <img
         id="img-spinner"
-        src="@/assets/images/ajax-loader-new.gif"
-        alt="Ajax Loader"
+        src="@/assets/images/loader.gif"
+        alt=""
       />
     </div>
   </div>

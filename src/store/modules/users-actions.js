@@ -201,15 +201,15 @@ export const getUserProfileDocument = async (context, username) => {
     response["id"] = foundDocument.data.attributes["#Id"]
     response["profileAttributes"] = profileAttributes
     
-    console.info("Profile loaded for user", username)
+    console.info("Profile loaded for user", username)   
+    
     return response
 
   } catch (error) {
     context.commit("error", {error : getErrorResponse(error) })      
   } finally {
-    context.commit("loading", {status:false}, { root: true })    
-  }
-
+    context.commit("loading", {status:false}, { root: true })        
+  }  
 }
 
 export const updateUserProfileDocument = async (context, payload) => {
