@@ -118,8 +118,12 @@ export const addUser = async (context, payload) => {
         //Get ServerTime updated 
         context.dispatch("dmsInfo")
         const dmsinfo = context.getters["dmsInfo"];
-        //        
-        const profileDoc = utils.composeProfileDocument(payload.user,dmsinfo.server_time)
+        //
+        let serverTime = dmsinfo.server_time;
+        if (appConfig.controlPasswordExpiration && appConfig.userMustChangePasswordInFirstLogin){
+          serverTime = ""          
+        }
+        const profileDoc = utils.composeProfileDocument(payload.user,serverTime)
         await apiDms.addDocument(appConfig.userProfileDocumentsParentIdContainer,profileDoc)
         console.info("User profile document created");  
       }      
@@ -164,10 +168,14 @@ export const updateUser = async (context, payload) => {
         //Get ServerTime updated 
         context.dispatch("dmsInfo")
         const dmsinfo = context.getters["dmsInfo"];
-        //        
+        //
+        let serverTime = dmsinfo.server_time
+        if (appConfig.userMustChangePasswordInFirstLogin){
+          serverTime = ""
+        }
         const pluginData = {
           "user" : payload.user,
-          "serverTime" : dmsinfo.server_time
+          "serverTime" : serverTime
         }        
 
         const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)                
@@ -283,7 +291,7 @@ export const updateUserPassword = async (context, payload) => {
         const pluginData = {
           "user" : payload.user,
           "serverTime" : dmsinfo.server_time
-        }        
+        }
 
         const foundDocument = await utils.searchAndGetUserProfileDocument(payload.user)                
         let docPayload = {

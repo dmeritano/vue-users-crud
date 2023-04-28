@@ -132,9 +132,12 @@ export function getProfileFieldValue(fn, data){
 
         case "fn_last_password_update": {
           //server_time": = >"2023-04-17T16:05:53-0300"
-          const udpatedAt = data.serverTime.substring(0,10).replaceAll("-","");
-          //return yyyymmdd()
-          return udpatedAt;
+          if (data.serverTime == ""){
+            return ""
+          }else{
+            const udpatedAt = data.serverTime.substring(0,10).replaceAll("-","");
+            return udpatedAt;
+          }
         }
         default:
             return "S/D";
