@@ -1,205 +1,205 @@
 {
-    "serviceBaseUrl2" : "http://localhost/DmsRestServiceDTOP411",
-    "serviceBaseUrl" : "http://localhost/DmsRestService-4.13-SNAPSHOT",
-    "showAppFooter" : true,
-    "showAboutPage" : true,
-    "allowedUsers" : ["admin", "testuser", "david"],
-    "getUserProfileDocument" : true,
-    "userProfileDocument" : "UserProfile",
-    "userProfileLinkedAttribute" : "user_name",
-    "allowUsersCrudAttribute" : "allow_users_crud",
-    "createOrEditUserProfileDocument" : true,
-    "userProfileDocumentsParentIdContainer" : "99269579112449",
-    "userProfileAttributes" : [
-        {
-            "name" : "user_name",
-            "completion" : "auto",
-            "defaultValue" : "",
-            "completionAutoFunction" : "fn_user",
-            "editable" : false,
-            "htmlControl" : "input",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_USERNAME"
-        },
-        {
-            "name" : "allow_users_crud",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD",
-            "selectConfig" : {
-                "name" : "select-open",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }            
-        },
-        {
-            "name" : "last_password_update",
-            "completion" : "auto",
-            "defaultValue" : "",
-            "completionAutoFunction" : "fn_last_password_update",
-            "editable" :false,
-            "htmlControl" : "input",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE"
-        },
-        {
-            "name" : "open",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_OPEN",
-            "selectConfig" : {
-                "name" : "select-open",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }
-        },
-        {
-            "name" : "view",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_VIEW",
-            "selectConfig" : {
-                "name" : "select-open",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }
-        },
-        {
-            "name" : "print",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_PRINT",            
-            "selectConfig" : {
-                "name" : "select-print",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }
-        },
-        {
-            "name" : "print_from",
-            "completion" : "default",
-            "defaultValue" : "",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "input",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM"
-        },                
-        {
-            "name" : "allowed_operations",
-            "completion" : "default",
-            "defaultValue" : "",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select-multiple",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS",            
-            "selectConfig" : {
-                "name" : "select-operations",
-                "items" : [
-                    {
-                        "valueAttribute" : "Expediente_Vehiculos",
-                        "i18nTextId" : ""
-                    },
-                    {
-                        "valueAttribute" : "Expediente_Impedidos",
-                        "i18nTextId" : ""
-                    },
-                    {
-                        "valueAttribute" : "Expediente_Medico",
-                        "i18nTextId" : ""
-                    }                    
-                ]
-            }
-        },
-        {
-            "name" : "allow_activities",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOW_ACTIVITIES",
-            "selectConfig" : {
-                "name" : "select-open",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }            
-        },
-        {
-            "name" : "allow_digitalization",
-            "completion" : "default",
-            "defaultValue" : "false",
-            "completionAutoFunction" : "",
-            "editable" : true,
-            "htmlControl" : "select",
-            "htmlLabeli18nId" : "PROFILE_ATTRIBUTE_LABEL_ALLOW_DIGITALIZATION",
-            "selectConfig" : {
-                "name" : "select-open",
-                "items" : [
-                    {
-                        "valueAttribute" : "false",
-                        "i18nTextId" : "PROFILE_FALSE_VALUE"
-                    },
-                    {
-                        "valueAttribute" : "true",
-                        "i18nTextId" : "PROFILE_TRUE_VALUE"
-                    }                    
-                ]
-            }            
-        }                        
-    ],
-    "controlPasswordExpiration" : true,
-    "passwordExpirationDateAttribute" : "last_password_update",
-    "maximumPasswordAge": 30,
-    "expirationAttributeSetValueFunction" : "fn_last_password_update",
-    "userMustChangePasswordInFirstLogin" : true
+  "serviceBaseUrl2": "http://localhost/DmsRestServiceDTOP",
+  "serviceBaseUrl": "/DmsRestServiceDTOP",
+  "showAppFooter": true,
+  "showAboutPage": true,
+  "allowedUsers": ["admin", "testuser", "david"],
+  "getUserProfileDocument": true,
+  "userProfileDocument": "UserProfile",
+  "userProfileLinkedAttribute": "user_name",
+  "allowUsersCrudAttribute": "allow_users_crud",
+  "createOrEditUserProfileDocument": true,
+  "userProfileDocumentsParentIdContainer": "99269579112449",
+  "userProfileAttributes": [
+    {
+      "name": "user_name",
+      "completion": "auto",
+      "defaultValue": "",
+      "completionAutoFunction": "fn_user",
+      "editable": false,
+      "htmlControl": "input",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_USERNAME"
+    },
+    {
+      "name": "allow_users_crud",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_ALLOWCRUD",
+      "selectConfig": {
+        "name": "select-open",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "last_password_update",
+      "completion": "auto",
+      "defaultValue": "",
+      "completionAutoFunction": "fn_last_password_update",
+      "editable": false,
+      "htmlControl": "input",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_LAST_PASS_UPDATE"
+    },
+    {
+      "name": "open",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_OPEN",
+      "selectConfig": {
+        "name": "select-open",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "view",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_VIEW",
+      "selectConfig": {
+        "name": "select-open",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "print",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_PRINT",
+      "selectConfig": {
+        "name": "select-print",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "print_from",
+      "completion": "default",
+      "defaultValue": "",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "input",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_PRINT_FROM"
+    },
+    {
+      "name": "allowed_operations",
+      "completion": "default",
+      "defaultValue": "",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select-multiple",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_ALLOWED_OPERATIONS",
+      "selectConfig": {
+        "name": "select-operations",
+        "items": [
+          {
+            "valueAttribute": "Expediente_Vehiculos",
+            "i18nTextId": ""
+          },
+          {
+            "valueAttribute": "Expediente_Impedidos",
+            "i18nTextId": ""
+          },
+          {
+            "valueAttribute": "Expediente_Medico",
+            "i18nTextId": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "allow_activities",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_ALLOW_ACTIVITIES",
+      "selectConfig": {
+        "name": "select-open",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    },
+    {
+      "name": "allow_digitalization",
+      "completion": "default",
+      "defaultValue": "false",
+      "completionAutoFunction": "",
+      "editable": true,
+      "htmlControl": "select",
+      "htmlLabeli18nId": "PROFILE_ATTRIBUTE_LABEL_ALLOW_DIGITALIZATION",
+      "selectConfig": {
+        "name": "select-open",
+        "items": [
+          {
+            "valueAttribute": "false",
+            "i18nTextId": "PROFILE_FALSE_VALUE"
+          },
+          {
+            "valueAttribute": "true",
+            "i18nTextId": "PROFILE_TRUE_VALUE"
+          }
+        ]
+      }
+    }
+  ],
+  "controlPasswordExpiration": true,
+  "passwordExpirationDateAttribute": "last_password_update",
+  "maximumPasswordAge": 30,
+  "expirationAttributeSetValueFunction": "fn_last_password_update",
+  "userMustChangePasswordInFirstLogin": true
 }
