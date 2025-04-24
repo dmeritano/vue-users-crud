@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <div class="login-container">
-      <h4 class="text-center py-4">{{$t("LOGIN_MAIN_TITLE")}}</h4>
+      <h4 class="text-center py-4">{{ $t("LOGIN_MAIN_TITLE") }}</h4>
 
       <form class="login-form" @submit.prevent>
         <div class="row">
@@ -10,7 +10,7 @@
                 readonly
                 onfocus="this.removeAttribute('readonly');"
                 Poniendolo en este campo tambien me soluciona el autocomplete del campo siguiente (pass)            
-              -->             
+              -->
             <input
               type="text"
               readonly
@@ -36,7 +36,7 @@
         </div>
         <div class="row my-3">
           <div class="col-md-12 text-center">
-              <p class="text-danger" v-if="error.hasError">{{error.i18nMsg}}</p>
+            <p class="text-danger" v-if="error.hasError">{{ error.i18nMsg }}</p>
           </div>
         </div>
         <div class="row mt-3">
@@ -46,9 +46,11 @@
               class="btn btn-default"
               @click="authenticate()"
             >
-              {{$t("LOGIN_ENTER_BTN")}}
-            </button>            
-            <div class="text-center pt-2"><small class="custom-version">v{{appVersion}}</small></div>
+              {{ $t("LOGIN_ENTER_BTN") }}
+            </button>
+            <div class="text-center pt-2">
+              <small class="custom-version">v{{ appVersion }}</small>
+            </div>
           </div>
         </div>
       </form>
@@ -64,35 +66,35 @@ export default {
     return {
       user: null,
       pass: null,
+      appVersion: this.$AppConfig.version,
     }
   },
-  computed:{
-    ...mapGetters({error: 'moduleUsers/error'}),
-    ...mapGetters({appVersion: 'version'})
+  computed: {
+    ...mapGetters({ error: "moduleUsers/error" }),
   },
   mounted() {
-    document.title =  this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_LOGIN")
+    document.title =
+      this.$t("HTML_HEAD_TITLE_BASE") + " - " + this.$t("HTML_HEAD_TITLE_LOGIN")
     this.clearError()
   },
   methods: {
     ...mapActions({
       login: "moduleUsers/login",
       dmsInfo: "moduleUsers/dmsInfo",
-      clearError : "moduleUsers/clearError" 
+      clearError: "moduleUsers/clearError",
     }),
     authenticate() {
       const payload = {
         user: this.user,
         pass: this.pass,
       }
-      this.login(payload)
-        .then((success) => {
-          if (success){
-            this.dmsInfo().then(()=>{
-              this.$router.push("/")
-            })            
-          }
-        })                      
+      this.login(payload).then((success) => {
+        if (success) {
+          this.dmsInfo().then(() => {
+            this.$router.push("/")
+          })
+        }
+      })
     },
   },
 }
@@ -104,9 +106,9 @@ export default {
   max-width: 100%;
   margin: 80px auto;
 }
-.custom-version{
+.custom-version {
   font-size: smaller;
   font-weight: lighter;
-  color:lightgrey;
+  color: lightgrey;
 }
 </style>
